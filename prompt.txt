@@ -1,0 +1,26 @@
+Generate a one page mobile first website for a law firm called West View Legal. Use tailwind css.
+
+The goal of this website is to generate appointments for the attorney Thomas Slattery. 
+
+Attorney Slattery offers services in three areas of law in California: 
+
+1. Family law 
+
+2. Civil law 
+
+3. Criminal law. 
+
+The unique selling point for the law firm is that Thomas Slattery is so confident in his work that if Attorney Slatery is not able to win the case he will refund half the fees.
+
+His photos are in the folder called images
+
+Appointments are set using calendly. So integrate calendly onto this one page website. 
+
+I also want you to integrate google analytics, facebook pixel for advertising on facebook. Google adwords pixel for advertising on google. 
+
+The law firms phone number is 415-200-0000. 
+
+The law firms email is tslattery@westviewlegal.com 
+
+The law firms address is 101 S. California Ave. #D100A Palo Alto, CA 94306
+

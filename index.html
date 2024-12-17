@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>West View Legal - Attorney Thomas Slattery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Calendly Integration -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    
+    <!-- Facebook Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID');
+        fbq('track', 'PageView');
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR_GA_ID');
+    </script>
+
+    <!-- Google Ads Pixel -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-YOUR_CONVERSION_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-YOUR_CONVERSION_ID');
+    </script>
+</head>
+<body class="bg-gray-100">
+    <!-- Hero Section -->
+    <header class="bg-blue-900 text-white">
+        <div class="container mx-auto px-4 py-16">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">West View Legal</h1>
+            <p class="text-xl md:text-2xl mb-8">Expert Legal Representation in San Francisco</p>
+            <button class="bg-yellow-500 text-blue-900 px-6 py-3 rounded-lg font-bold hover:bg-yellow-400 transition" 
+                    onclick="Calendly.initPopupWidget({url: 'https://calendly.com/YOUR_CALENDLY_LINK'})">
+                Schedule a Consultation
+            </button>
+        </div>
+    </header>
+
+    <!-- Attorney Section -->
+    <section class="container mx-auto px-4 py-16">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+            <img src="images/thomas-slattery.jpg" alt="Attorney Thomas Slattery" class="w-64 h-64 rounded-full object-cover">
+            <div>
+                <h2 class="text-3xl font-bold mb-4">Attorney Thomas Slattery</h2>
+                <p class="text-lg mb-4">With years of experience in California law, Attorney Slattery provides exceptional legal representation in Family, Civil, and Criminal law.</p>
+                <p class="text-lg font-bold text-blue-900">Our Guarantee: If we don't win your case, you'll receive a 50% refund on legal fees.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice Areas -->
+    <section class="bg-gray-200 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Practice Areas</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Family Law</h3>
+                    <p>Divorce, custody, support, and all family-related legal matters.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Civil Law</h3>
+                    <p>Personal injury, contracts, and civil litigation cases.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Criminal Law</h3>
+                    <p>Criminal defense and representation in state courts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="container mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold mb-8 text-center">Contact Us</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div>
+                <h3 class="text-xl font-bold mb-4">Office Location</h3>
+                <p class="mb-2">123 Main Street</p>
+                <p class="mb-4">San Francisco, CA 94101</p>
+                
+                <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+                <p class="mb-2">Phone: <a href="tel:415-200-0000" class="text-blue-900">415-200-0000</a></p>
+                <p class="mb-4">Email: <a href="mailto:tslattery@westviewlegal.com" class="text-blue-900">tslattery@westviewlegal.com</a></p>
+            </div>
+            <div>
+                <!-- Calendly inline widget -->
+                <div class="calendly-inline-widget" data-url="https://calendly.com/tslattery-westviewlegal/30min" style="min-width:320px;height:600px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2023 West View Legal. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
