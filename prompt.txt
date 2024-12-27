@@ -1,26 +1,47 @@
-Generate a one page mobile first website for a law firm called West View Legal. Use tailwind css.
+**Goal & Requirements**  
+- Create a **single-page, mobile-first website** for the “AI Associate Attorney” app.  
+- Use **Tailwind CSS** for styling (you can use the Tailwind CDN).  
+- The purpose of this page is to **generate signups** for the AI Associate Attorney app.  
+- The AI Associate Attorney app can:  
+  1. Write motions  
+  2. Respond to discovery requests  
+  3. Create goals  
+  4. Create tasks  
+  5. Do legal filings  
+  6. Do legal research  
+  7. Do legal analysis  
 
-The goal of this website is to generate appointments for the attorney Thomas Slattery. 
+- The app is free to use for up to **100 MB of storage**. After that, users pay for additional storage.  
+- Integrate **Calendly** for scheduling appointments directly on the page.  
+- Integrate:  
+  - **Google Analytics**  
+  - **Facebook Pixel**  
+  - **Google Ads conversion tracking**  
 
-Attorney Slattery offers services in three areas of law in California: 
+- Contact details:  
+  - Phone: **775-443-6747**  
+  - Email: **vikas@associateattorney.ai**  
+  - Address: **101 S. California Ave. #D100A Palo Alto, CA 94306**  
 
-1. Family law 
+**Instructions**  
+1. Provide a **complete HTML file** with the following sections:  
+   - **Header** (logo or brand name, concise navigation)  
+   - **Hero Section**: short tagline or heading about how AI Associate Attorney revolutionizes legal work.  
+   - **Features Section**: briefly highlight the 7 capabilities (above) in a grid or list format.  
+   - **Pricing/Storage Info**: mention free 100 MB, then paid storage for more.  
+   - **Calendly Embed**: allow visitors to book an appointment without leaving the page.  
+   - **Signup Call-to-Action (CTA)**: prompt visitors to sign up or request more info.  
+   - **Contact Section**: show phone, email, address.  
+   - **Footer**: minimal, but include any disclaimers or disclaimers placeholder.  
 
-2. Civil law 
+2. Apply **Tailwind CSS** classes to ensure the layout is **mobile-first** and responsive.  
 
-3. Criminal law. 
+3. Include placeholder/script tags or minimal scripts for:  
+   - **Google Analytics**  
+   - **Facebook Pixel**  
+   - **Google Ads Conversion**  
 
-The unique selling point for the law firm is that Thomas Slattery is so confident in his work that if Attorney Slatery is not able to win the case he will refund half the fees.
+4. Use semantic HTML wherever possible.  
 
-His photos are in the folder called images
-
-Appointments are set using calendly. So integrate calendly onto this one page website. 
-
-I also want you to integrate google analytics, facebook pixel for advertising on facebook. Google adwords pixel for advertising on google. 
-
-The law firms phone number is 415-200-0000. 
-
-The law firms email is tslattery@westviewlegal.com 
-
-The law firms address is 101 S. California Ave. #D100A Palo Alto, CA 94306
+**Important**: Return only the **HTML code** for the final single-page website in your answer, properly formatted with Tailwind integration, placeholders for analytics/pixel scripts, and working Calendly embed code.
 
