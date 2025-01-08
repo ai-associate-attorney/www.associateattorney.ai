@@ -105,12 +105,17 @@
         </div>
     </section>
 
-    <!-- Calendly Integration -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-2xl font-bold mb-8">Schedule a Demo</h2>
-            <div class="calendly-inline-widget" data-url="https://calendly.com/YOUR_CALENDLY_LINK" style="min-width:320px;height:700px;"></div>
-            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <!-- Meet Our AI Attorneys Section -->
+    <section class="relative py-24 from-neutral-900 overflow-hidden">
+        <div class="relative container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 text-center">Meet our AI Attorneys</h2>
+            <p class="text-xl text-center max-w-3xl mx-auto mb-16">
+                Our AI Attorneys are not just legal assistants - they are your digital workers. With 24/7 operations, they never stop working.
+            </p>
+
+            <div id="attorney-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto text-white">
+                <!-- Content will be dynamically inserted here -->
+            </div>
         </div>
     </section>
 
@@ -135,5 +140,100 @@
             <p class="text-sm mt-2">Legal disclaimer: Results may vary. AI assistance should be reviewed by qualified legal professionals.</p>
         </div>
     </footer>
+
+    <script>
+        // Hardcoded attorney data to avoid CORS issues
+        const attorneys = [
+            {
+                "id": 4,
+                "name": "Alice",
+                "image_url": "https://oqdnbpmmgntqtigstaow.supabase.co/storage/v1/object/public/attorneys/images/ghxcvv818pw.png",
+                "video_url": "https://oqdnbpmmgntqtigstaow.supabase.co/storage/v1/object/public/attorneys/videos/h8sd7apq4ew.mp4",
+                "specialty": "The world's best SDR",
+                "jurisdiction": "Federal"
+            },
+            {
+                "id": 3,
+                "name": "Mike",
+                "image_url": "https://oqdnbpmmgntqtigstaow.supabase.co/storage/v1/object/public/attorneys/images/19629644tjx.jpg",
+                "video_url": "https://oqdnbpmmgntqtigstaow.supabase.co/storage/v1/object/public/attorneys/videos/0q0hq2otoov.mp4",
+                "specialty": "Inbound and outbound calls",
+                "jurisdiction": "Appellate"
+            }
+        ];
+
+        function renderAIAttorneys() {
+            const attorneyContainer = document.querySelector('#attorney-grid');
+            
+            attorneyContainer.innerHTML = attorneys.map(attorney => `
+                <div class="relative rounded-3xl overflow-hidden bg-gradient-to-b from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm">
+                    <div class="absolute top-4 left-4 z-10 flex items-center gap-3">
+                        <span class="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-sm font-medium">
+                            ${attorney.name}
+                        </span>
+                        <span class="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-sm font-medium flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M11.983 1.907a.75.75 0 00-1.292-.657l-8.5 9.5a.75.75 0 00.158 1.115l8.5 5.5a.75.75 0 001.151-.63V1.907z"/>
+                            </svg>
+                            ${attorney.jurisdiction}
+                        </span>
+                    </div>
+                    
+                    <div class="relative aspect-[4/5]">
+                        <img 
+                            src="${attorney.image_url}"
+                            alt="AI Attorney ${attorney.name}"
+                            class="w-full h-full object-cover"
+                        >
+                        <video 
+                            class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
+                            loop
+                            muted
+                            playsinline
+                        >
+                            <source src="${attorney.video_url}" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md rounded-2xl p-4 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="${attorney.image_url}" class="w-10 h-10 rounded-full" alt="${attorney.name}">
+                            <div>
+                                <div class="text-sm">${attorney.name}</div>
+                                <div class="text-sm font-medium">${attorney.name} the ${attorney.specialty}</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/>
+                                </svg>
+                            </button>
+                            <button class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M17.924 2.617a.997.997 0 00-.215-.322l-.004-.004A.997.997 0 0017 2h-4a1 1 0 100 2h1.586l-3.293 3.293a1 1 0 001.414 1.414L16 5.414V7a1 1 0 102 0V3a.997.997 0 00-.076-.383z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Video autoplay initialization remains the same
+            document.querySelectorAll('video').forEach(video => {
+                video.classList.remove('opacity-0');
+                video.setAttribute('autoplay', '');
+                video.setAttribute('loop', '');
+                video.setAttribute('muted', '');
+                video.setAttribute('playsinline', '');
+                video.play().catch(function(error) {
+                    console.log("Video play failed:", error);
+                });
+            });
+        }
+
+        // Load attorneys when the page loads
+        document.addEventListener('DOMContentLoaded', renderAIAttorneys);
+    </script>
 </body>
 </html>
