@@ -2,7 +2,22 @@
 - Create a **single-page, mobile-first website** for the “AI Associate Attorney” app.  
 - Use **Tailwind CSS** for styling (you can use the Tailwind CDN).  
 - The purpose of this page is to **generate signups** for the AI Associate Attorney app.  
+- The AI associateattorney is a market place where people can hire AI attorneys to do their legal work. +
+- Currently, we have two AI attorneys:
+  - AI Attorney 
+    1: Eleanor, Photo available at https://oqdnbpmmgntqtigstaow.supabase.co/storage/v1/object/public/attorneys/images/wmec3dvqde.jpg
+      Video available at https://oqdnbpmmgntqtigstaow.supabase.co/storage/v1/object/public/attorneys/videos/ql3ocwfh01b.mp4
+      Jurisdiction: California
+      Specialty: Family law
+    2: Julian, Photo available at https://oqdnbpmmgntqtigstaow.supabase.co/storage/v1/object/public/attorneys/images/5hokbk7905t.jpg
+      Video available at https://oqdnbpmmgntqtigstaow.supabase.co/storage/v1/object/public/attorneys/videos/ymhkgwowo28.mp4
+      Jurisdiction: California
+      Specialty: Criminal law
+- Our goal is to reduce the cost of legal services by 10 times
+- Once the AI Attornet does the ground work, the user can hire human attorney to check the AI Attorney's work and do the filings.
+- Also create the signup page for human attorneys to signup.
 - The AI Associate Attorney app can:  
+  1. Do initial consultation
   1. Write motions  
   2. Respond to discovery requests  
   3. Create goals  
@@ -11,12 +26,7 @@
   6. Do legal research  
   7. Do legal analysis  
 
-- The app is free to use for up to **100 MB of storage**. After that, users pay for additional storage.  
-- Integrate **Calendly** for scheduling appointments directly on the page.  
-- Integrate:  
-  - **Google Analytics**  
-  - **Facebook Pixel**  
-  - **Google Ads conversion tracking**  
+- The app is free to use for the users and Attorneys. 
 
 - Contact details:  
   - Phone: **775-443-6747**  
@@ -29,7 +39,6 @@
    - **Hero Section**: short tagline or heading about how AI Associate Attorney revolutionizes legal work.  
    - **Features Section**: briefly highlight the 7 capabilities (above) in a grid or list format.  
    - **Pricing/Storage Info**: mention free 100 MB, then paid storage for more.  
-   - **Calendly Embed**: allow visitors to book an appointment without leaving the page.  
    - **Signup Call-to-Action (CTA)**: prompt visitors to sign up or request more info.  
    - **Contact Section**: show phone, email, address.  
    - **Footer**: minimal, but include any disclaimers or disclaimers placeholder.  
