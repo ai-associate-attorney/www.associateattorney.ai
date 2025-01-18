@@ -4,10 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Associate Attorney - Help with filling out forms</title>
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>AI Associate Attorney - Help with filling out forms</h1>
-    <p>This is a simple website that helps you fill out forms.</p>
+<body class="bg-gray-50 p-8">
+    <h1 class="text-3xl font-bold mb-8">AI Associate Attorney - Legal Forms</h1>
+    
+    <div class="mb-8 flex flex-wrap gap-4">
+        <div class="w-full md:w-64">
+            <label for="jurisdiction" class="block text-sm font-medium text-gray-700 mb-2">Jurisdiction</label>
+            <select id="jurisdiction" class="w-full p-2 border rounded-md">
+                <option value="">Select Jurisdiction</option>
+            </select>
+        </div>
+        
+        <div class="w-full md:w-64">
+            <label for="area" class="block text-sm font-medium text-gray-700 mb-2">Area of Law</label>
+            <select id="area" class="w-full p-2 border rounded-md" disabled>
+                <option value="">Select Area</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Forms List -->
+    <div id="formsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Forms will be dynamically inserted here -->
+    </div>
+
+    <script>
+        async function loadFormsData() {
+            try {
+                const response = await fetch('forms_list.json');
+                const data = await response.json();
+                initializeSelectors(data);
+            } catch (error) {
+                console.error('Error loading forms:', error);
+                document.getElementById('formsList').innerHTML = 
+                    '<p class="text-red-600">Error loading forms. Please try again later.</p>';
+            }
+        }
+
+        function initializeSelectors(data) {
+            const jurisdictionSelect = document.getElementById('jurisdiction');
+            const areaSelect = document.getElementById('area');
+            
+            // Populate jurisdictions
+            Object.keys(data.jurisdictions).forEach(jurisdiction => {
+                const option = document.createElement('option');
+                option.value = jurisdiction;
+                option.textContent = jurisdiction.charAt(0).toUpperCase() + jurisdiction.slice(1);
+                jurisdictionSelect.appendChild(option);
+            });
+
+            // Handle jurisdiction change
+            jurisdictionSelect.addEventListener('change', () => {
+                const selectedJurisdiction = jurisdictionSelect.value;
+                updateAreaSelect(data, selectedJurisdiction);
+            });
+
+            // Handle area change
+            areaSelect.addEventListener('change', () => {
+                const selectedJurisdiction = jurisdictionSelect.value;
+                const selectedArea = areaSelect.value;
+                displayForms(data, selectedJurisdiction, selectedArea);
+            });
+        }
+
+        function updateAreaSelect(data, jurisdiction) {
+            const areaSelect = document.getElementById('area');
+            areaSelect.innerHTML = '<option value="">Select Area</option>';
+            
+            if (jurisdiction) {
+                const areas = Object.keys(data.jurisdictions[jurisdiction].areas);
+                areas.forEach(area => {
+                    const option = document.createElement('option');
+                    option.value = area;
+                    option.textContent = area.split('-').map(word => 
+                        word.charAt(0).toUpperCase() + word.slice(1)
+                    ).join(' ');
+                    areaSelect.appendChild(option);
+                });
+                areaSelect.disabled = false;
+            } else {
+                areaSelect.disabled = true;
+            }
+            
+            document.getElementById('formsList').innerHTML = '';
+        }
+
+        function displayForms(data, jurisdiction, area) {
+            const formsList = document.getElementById('formsList');
+            
+            if (!jurisdiction || !area) {
+                formsList.innerHTML = '';
+                return;
+            }
+
+            const forms = data.jurisdictions[jurisdiction].areas[area].forms;
+            
+            formsList.innerHTML = forms.map(form => `
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="font-semibold text-lg mb-2">${form.name}</h3>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-sm text-gray-500">${jurisdiction} - ${area}</span>
+                        <a href="${form.path}" 
+                           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
+                            Fill Form
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load forms when page loads
+        document.addEventListener('DOMContentLoaded', loadFormsData);
+    </script>
 </body>
 </html>
