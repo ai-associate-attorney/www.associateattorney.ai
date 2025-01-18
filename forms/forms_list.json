@@ -3,28 +3,7 @@
     "new-york": {
       "areas": {
         "family-law": {
-          "forms": [
-            {
-              "id": "fl-300",
-              "name": "Request For Order {FL-300}- ",
-              "path": "new-york/family-law/fl-300/Request For Order {FL-300}- fillable.pdf"
-            },
-            {
-              "id": "fl-305",
-              "name": "Temporary Emergency (Ex Parte) Orders {FL-305}- ",
-              "path": "new-york/family-law/fl-305/Temporary Emergency (Ex Parte) Orders {FL-305}- fillable.pdf"
-            },
-            {
-              "id": "fl-320",
-              "name": "Responsive Declaration To Request For Order {FL-320}- ",
-              "path": "new-york/family-law/fl-320/Responsive Declaration To Request For Order {FL-320}- fillable.pdf"
-            },
-            {
-              "id": "fl-321",
-              "name": "Witness List {FL-321}- ",
-              "path": "new-york/family-law/fl-321/Witness List {FL-321}- fillable.pdf"
-            }
-          ]
+          "forms": []
         }
       }
     },
@@ -34,23 +13,8 @@
           "forms": [
             {
               "id": "fl-300",
-              "name": "Request For Order {FL-300}- ",
-              "path": "california/family-law/fl-300/Request For Order {FL-300}- fillable.pdf"
-            },
-            {
-              "id": "fl-305",
-              "name": "Temporary Emergency (Ex Parte) Orders {FL-305}- ",
-              "path": "california/family-law/fl-305/Temporary Emergency (Ex Parte) Orders {FL-305}- fillable.pdf"
-            },
-            {
-              "id": "fl-320",
-              "name": "Responsive Declaration To Request For Order {FL-320}- ",
-              "path": "california/family-law/fl-320/Responsive Declaration To Request For Order {FL-320}- fillable.pdf"
-            },
-            {
-              "id": "fl-321",
-              "name": "Witness List {FL-321}- ",
-              "path": "california/family-law/fl-321/Witness List {FL-321}- fillable.pdf"
+              "name": "Request-For-Order-",
+              "path": "california/family-law/fl-300/Request-For-Order-fillable.pdf"
             }
           ]
         }

@@ -7,3 +7,6 @@ npm install ghost-cli@latest -g
 cd blogh
 ghost install local
 
+3. How to test locally?
+python3 -m http.server 8000
+and then localhost:8000/index.html

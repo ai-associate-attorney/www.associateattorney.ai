@@ -35,7 +35,7 @@ def generate_forms_list():
                 # Look for *-fillable.pdf in the form directory here form_dir_path is california/family-law/fl-300
                 # print(form_dir_path)
                 for file in os.listdir(form_dir_path):
-                    if file.endswith('- fillable.pdf'):
+                    if file.endswith('-fillable.pdf'):
                         form_desc = file[:-12]  # Remove '-fillable.pdf'
                         form_data = {
                             "id": form_dir,

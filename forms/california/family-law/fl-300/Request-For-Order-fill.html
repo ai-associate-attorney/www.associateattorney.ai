@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fill Form - AI Associate Attorney</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="container mx-auto">
+        <div class="flex gap-8">
+            <!-- PDF Preview -->
+            <div class="w-1/2">
+                <div class="bg-white rounded-lg shadow-lg">
+                    <div class="h-16 px-6 flex items-center justify-between border-b">
+                        <h3 class="font-semibold text-lg" id="formName"></h3>
+                        <a href="/forms" class="text-blue-600 hover:text-blue-800">Back to Forms</a>
+                    </div>
+                    <div class="h-[calc(100vh-12rem)] p-4">
+                        <iframe id="pdfViewer" class="w-full h-full border rounded"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chat Interface -->
+            <div class="w-1/2">
+                <div class="bg-white rounded-lg shadow-lg h-full flex flex-col">
+                    <div class="h-16 px-6 flex items-center border-b">
+                        <h3 class="font-semibold">Chat with AI Assistant</h3>
+                    </div>
+                    <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4">
+                        <!-- Messages will be inserted here -->
+                    </div>
+                    <div class="border-t p-4">
+                        <div class="flex gap-2">
+                            <input type="text" id="userInput" 
+                                   class="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   placeholder="Type your message...">
+                            <button onclick="sendMessage()" 
+                                    class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get form details from the current URL path
+        const pathParts = window.location.pathname.split('/');
+        const formId = pathParts[pathParts.length - 2]; // Gets the form directory name (fl-300)
+        const formDir = pathParts.slice(1, -1).join('/'); // Gets the directory path (forms/california/family-law/fl-300)
+        const pdfPath = `/${formDir}/Request-For-Order-fillable.pdf`;
+        console.log(pdfPath);
+        
+        // Initialize the form
+        document.getElementById('formName').textContent = formId.toUpperCase();
+        document.getElementById('pdfViewer').src = pdfPath;
+        
+        // Initialize chat
+        document.getElementById('chatMessages').innerHTML = `
+            <div class="bg-gray-100 rounded-lg p-4">
+                <p class="text-gray-700">Hi! I'll help you fill out this form. What field would you like to fill first?</p>
+            </div>
+        `;
+        
+        // Handle message sending
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML += `
+                <div class="flex justify-end">
+                    <div class="bg-blue-600 text-white rounded-lg p-4 max-w-[80%]">
+                        <p>${message}</p>
+                    </div>
+                </div>
+            `;
+
+            userInput.value = '';
+            
+            // Add AI response (replace with actual API call)
+            setTimeout(() => {
+                chatMessages.innerHTML += `
+                    <div class="bg-gray-100 rounded-lg p-4 max-w-[80%]">
+                        <p class="text-gray-700">I'll help you fill that field. Could you please provide the value you'd like to enter?</p>
+                    </div>
+                `;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        }
+
+        // Handle enter key
+        document.getElementById('userInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

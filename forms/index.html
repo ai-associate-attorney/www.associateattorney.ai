@@ -35,6 +35,47 @@
         <!-- Forms will be dynamically inserted here -->
     </div>
 
+    <!-- Form Filler Modal -->
+    <div id="formFillerModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white w-full max-w-6xl h-[90vh] rounded-lg shadow-xl flex">
+            <!-- PDF Preview -->
+            <div class="w-1/2 h-full border-r">
+                <div class="h-16 px-6 flex items-center justify-between border-b">
+                    <h3 class="font-semibold text-lg" id="formName"></h3>
+                    <button onclick="closeFormFiller()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="h-[calc(90vh-4rem)] p-4">
+                    <iframe id="pdfViewer" class="w-full h-full border rounded"></iframe>
+                </div>
+            </div>
+            
+            <!-- Chat Interface -->
+            <div class="w-1/2 h-full flex flex-col">
+                <div class="h-16 px-6 flex items-center border-b">
+                    <h3 class="font-semibold">Chat with AI Assistant</h3>
+                </div>
+                <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4">
+                    <!-- Messages will be inserted here -->
+                </div>
+                <div class="border-t p-4">
+                    <div class="flex gap-2">
+                        <input type="text" id="userInput" 
+                               class="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="Type your message...">
+                        <button onclick="sendMessage()" 
+                                class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                            Send
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         async function loadFormsData() {
             try {
@@ -126,7 +167,7 @@
                     <h3 class="font-semibold text-lg mb-2">${form.name}</h3>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-sm text-gray-500">${jurisdiction} - ${area}</span>
-                        <a href="${form.path}" 
+                        <a href="/${form.path.replace('fillable.pdf', 'fill.html')}"
                            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
                             Fill Form
                         </a>
@@ -139,7 +180,6 @@
             const formsList = document.getElementById('formsList');
             const allForms = [];
             
-            // Collect all forms across jurisdictions and areas
             Object.entries(data.jurisdictions).forEach(([jurisdiction, jurisdictionData]) => {
                 Object.entries(jurisdictionData.areas).forEach(([area, areaData]) => {
                     areaData.forms.forEach(form => {
@@ -152,12 +192,10 @@
                 });
             });
             
-            // Filter forms based on search term
             const filteredForms = searchTerm ? 
                 allForms.filter(form => form.name.toLowerCase().includes(searchTerm)) : 
                 allForms;
             
-            // Display first 50 filtered forms
             const formsToDisplay = filteredForms.slice(0, 50);
             
             if (formsToDisplay.length === 0) {
@@ -170,7 +208,7 @@
                     <h3 class="font-semibold text-lg mb-2">${form.name}</h3>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-sm text-gray-500">${form.jurisdiction} - ${form.area}</span>
-                        <a href="${form.path}" 
+                        <a href="/${form.path.replace('fillable.pdf', 'fill.html')}"
                            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
                             Fill Form
                         </a>
@@ -181,6 +219,62 @@
 
         // Load forms when page loads
         document.addEventListener('DOMContentLoaded', loadFormsData);
+
+        let currentFormPath = '';
+
+        function openFormFiller(formPath, formName) {
+            currentFormPath = formPath;
+            document.getElementById('formName').textContent = formName;
+            document.getElementById('pdfViewer').src = formPath;
+            document.getElementById('formFillerModal').classList.remove('hidden');
+            document.getElementById('chatMessages').innerHTML = `
+                <div class="bg-gray-100 rounded-lg p-4">
+                    <p class="text-gray-700">Hi! I'll help you fill out the ${formName}. What field would you like to fill first?</p>
+                </div>
+            `;
+        }
+
+        function closeFormFiller() {
+            document.getElementById('formFillerModal').classList.add('hidden');
+            document.getElementById('chatMessages').innerHTML = '';
+            document.getElementById('userInput').value = '';
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // Add user message to chat
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML += `
+                <div class="flex justify-end">
+                    <div class="bg-blue-600 text-white rounded-lg p-4 max-w-[80%]">
+                        <p>${message}</p>
+                    </div>
+                </div>
+            `;
+
+            // Clear input
+            userInput.value = '';
+
+            // Simulate AI response (replace with actual API call)
+            setTimeout(() => {
+                chatMessages.innerHTML += `
+                    <div class="bg-gray-100 rounded-lg p-4 max-w-[80%]">
+                        <p class="text-gray-700">I'll help you fill that field. Could you please provide the value you'd like to enter?</p>
+                    </div>
+                `;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        }
+
+        // Handle enter key in input
+        document.getElementById('userInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
     </script>
 </body>
 </html>
