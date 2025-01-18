@@ -72,14 +72,17 @@
         // Add field mapping and state management
         let currentField = null;
         const fieldMappings = {
-            "Name": "FillText123",
-            "Firm Name": "FillText122",
-            "Street address": "FillText121",
-            "City": "FillText120",
+            "name": "FillText123",
+            "firmName": "FillText122",
+            "streetAddress": "FillText121",
+            "city": "FillText120",
             // Add more field mappings as needed
         };
 
-        // Enhanced sendMessage function
+        let pdfDoc = null;
+        let filledFields = {};
+
+        // Modified sendMessage function
         async function sendMessage() {
             const userInput = document.getElementById('userInput');
             const message = userInput.value.trim();
@@ -90,9 +93,12 @@
             userInput.value = '';
 
             try {
-                // Fetch and load PDF
-                const existingPdfBytes = await fetch(pdfPath).then(res => res.arrayBuffer());
-                const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+                // Only load the PDF if we haven't already
+                if (!pdfDoc) {
+                    const existingPdfBytes = await fetch(pdfPath).then(res => res.arrayBuffer());
+                    pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+                }
+                
                 const form = pdfDoc.getForm();
                 
                 // Get all form fields for debugging
@@ -120,7 +126,14 @@
                             return;
                         }
                         
-                        textField.setText(validatedInput.value);
+                        // Store the field value
+                        filledFields[fieldName] = validatedInput.value;
+                        
+                        // Fill all stored fields
+                        for (const [field, value] of Object.entries(filledFields)) {
+                            const textField = form.getTextField(field);
+                            textField.setText(value);
+                        }
                         
                         // Save and display the updated PDF
                         const pdfBytes = await pdfDoc.save();
@@ -163,9 +176,9 @@
         function identifyRequestedField(message) {
             const fieldKeywords = {
                 name: ['name', 'full name'],
-                address: ['address', 'location', 'residence'],
-                phone: ['phone', 'telephone', 'contact number'],
-                email: ['email', 'e-mail', 'electronic mail']
+                streetAddress: ['address', 'street address', 'location', 'residence'],
+                firmName: ['firm name', 'firm', 'company name'],
+                city: ['city', 'town'],
                 // Add more field keywords as needed
             };
 
