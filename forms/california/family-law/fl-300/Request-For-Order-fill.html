@@ -69,15 +69,27 @@
             </div>
         `;
         
-        // Add field mapping and state management
+        // Replace the hardcoded fieldMappings with dynamic loading
         let currentField = null;
-        const fieldMappings = {
-            "name": "FillText123",
-            "firmName": "FillText122",
-            "streetAddress": "FillText121",
-            "city": "FillText120",
-            // Add more field mappings as needed
-        };
+        let fieldMappings = {};
+
+        // Load field mappings from JSON file
+        async function loadFieldMappings() {
+            try {
+                const response = await fetch('field_mappings.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load field mappings');
+                }
+                fieldMappings = await response.json();
+                console.log('Loaded field mappings:', fieldMappings);
+            } catch (error) {
+                console.error('Error loading field mappings:', error);
+                addMessageToChat('Sorry, I encountered an error loading the form fields. Please try again later.', 'ai');
+            }
+        }
+
+        // Call loadFieldMappings when the page loads
+        document.addEventListener('DOMContentLoaded', loadFieldMappings);
 
         let pdfDoc = null;
         let filledFields = {};
@@ -93,6 +105,11 @@
             userInput.value = '';
 
             try {
+                // Check if field mappings are loaded
+                if (Object.keys(fieldMappings).length === 0) {
+                    await loadFieldMappings();
+                }
+
                 // Only load the PDF if we haven't already
                 if (!pdfDoc) {
                     const existingPdfBytes = await fetch(pdfPath).then(res => res.arrayBuffer());

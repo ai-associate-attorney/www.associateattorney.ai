@@ -3,106 +3,106 @@ const path = require('path');
 const { PDFDocument } = require('pdf-lib');
 
 async function generateFieldMappings() {
-    const fieldMappings = {};
-    
     try {
-        // Read PDF file
         const pdfPath = path.join(__dirname, 'Request-For-Order-fillable.pdf');
         const pdfBytes = await fs.readFile(pdfPath);
         const pdfDoc = await PDFDocument.load(pdfBytes);
         
-        // Get form fields
         const form = pdfDoc.getForm();
         const fields = form.getFields();
         
-        // Log all available fields for inspection
-        console.log('Available fields:');
+        // Track unmapped fields for human review
+        let unmappedTextCounter = 1;
+        let unmappedCheckboxCounter = 1;
+        const mappings = {};
+        
         fields.forEach(field => {
             const fieldName = field.getName();
             const fieldType = field.constructor.name;
-            console.log(`${fieldName} (${fieldType})`);
+            
+            if (!fieldName) return;
+            
+            let mappingKey;
+            if (fieldType === 'PDFTextField') {
+                mappingKey = createTextFieldMapping(fieldName);
+                if (mappingKey.startsWith('textField_')) {
+                    mappingKey = `needs_human_readable_name_text_${unmappedTextCounter++}`;
+                }
+            } else if (fieldType === 'PDFCheckBox') {
+                mappingKey = createCheckboxMapping(fieldName);
+                if (mappingKey.startsWith('checkbox_')) {
+                    mappingKey = `needs_human_readable_name_checkbox_${unmappedCheckboxCounter++}`;
+                }
+            } else if (fieldType === 'PDFButton') {
+                mappingKey = fieldName.toLowerCase();
+            }
+            
+            if (mappingKey) {
+                mappings[mappingKey] = fieldName;
+            }
         });
         
-        // Create mappings based on field names and types
-        const mappings = {};
-        fields.forEach(field => {
-            const fieldName = field.getName();
-            const humanReadableName = createHumanReadableKey(fieldName, field);
-            mappings[humanReadableName] = fieldName;
+        // Sort mappings by key for better readability
+        const sortedMappings = {};
+        Object.keys(mappings).sort().forEach(key => {
+            sortedMappings[key] = mappings[key];
         });
         
-        // Write mappings to a JSON file
         await fs.writeFile(
             path.join(__dirname, 'field_mappings.json'),
-            JSON.stringify(mappings, null, 2)
+            JSON.stringify(sortedMappings, null, 2)
         );
         
-        console.log('Field mappings generated successfully!');
+        console.log('\nField mappings generated successfully!');
+        console.log(`Total fields mapped: ${Object.keys(sortedMappings).length}`);
+        console.log(`Text fields needing human review: ${unmappedTextCounter - 1}`);
+        console.log(`Checkbox fields needing human review: ${unmappedCheckboxCounter - 1}`);
         
     } catch (error) {
         console.error('Error generating field mappings:', error);
     }
 }
 
-function createHumanReadableKey(fieldName, field) {
-    // Common patterns in PDF form fields
-    const patterns = {
-        // Personal Information
-        name: /(?:full)?name|nombre/i,
-        email: /email|correo/i,
-        phone: /phone|telefono|tel/i,
-        address: /address|direccion/i,
-        city: /city|ciudad/i,
-        state: /state|estado/i,
-        zip: /zip|postal/i,
-        
-        // Legal Fields
-        caseNumber: /case.*num|numero.*caso/i,
-        courtName: /court.*name|nombre.*corte/i,
-        attorney: /attorney|abogado/i,
-        plaintiff: /plaintiff|demandante/i,
-        defendant: /defendant|demandado/i,
-        
-        // Dates
-        date: /date|fecha/i,
-        filingDate: /filing.*date|fecha.*presentacion/i,
-        hearingDate: /hearing.*date|fecha.*audiencia/i,
-        
-        // Common Form Elements
-        signature: /signature|firma/i,
-        checkbox: /check|box|casilla/i,
-        
+function createTextFieldMapping(fieldName) {
+    // Common text field patterns
+    const textFieldPatterns = {
+        attorneyName: /^FillText(123|122)$/,
+        partyName: /^FillText(121|120)$/,
+        caseNumber: /^FillText119$/,
+        courtInfo: /^FillText(118|117|116)$/,
+        hearingInfo: /^FillText(115|114|113)$/,
+        address: /^FillText(112|111|110)$/,
+        phone: /^FillText(109|108)$/,
+        email: /^FillText107$/,
         // Add more patterns as needed
     };
-    
-    // Try to match field name against patterns
-    for (const [key, pattern] of Object.entries(patterns)) {
+
+    for (const [key, pattern] of Object.entries(textFieldPatterns)) {
         if (pattern.test(fieldName)) {
             return key;
         }
     }
-    
-    // If no pattern matches, create a fallback name
-    // Remove common PDF field prefixes/suffixes
-    let humanName = fieldName
-        .replace(/^(Fill|Check|Text|Box|Field)/i, '')
-        .replace(/\d+$/, '')
-        .toLowerCase();
-    
-    // Convert camelCase or snake_case to spaces
-    humanName = humanName
-        .replace(/([A-Z])/g, ' $1')
-        .replace(/_/g, ' ')
-        .trim();
-    
-    // Convert to camelCase for JavaScript
-    return humanName
-        .split(' ')
-        .map((word, index) => 
-            index === 0 ? word.toLowerCase() : 
-            word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-        )
-        .join('');
+
+    // Fallback: create a generic mapping
+    return `textField_${fieldName}`;
+}
+
+function createCheckboxMapping(fieldName) {
+    // Common checkbox patterns
+    const checkboxPatterns = {
+        consentCheckbox: /^CheckBox(197|196)$/,
+        agreementCheckbox: /^CheckBox(195|194)$/,
+        // Add more patterns as needed
+    };
+
+    for (const [key, pattern] of Object.entries(checkboxPatterns)) {
+        if (pattern.test(fieldName)) {
+            return key;
+        }
+    }
+
+    // Fallback: create a generic mapping
+    return `checkbox_${fieldName}`;
 }
 
 // Run the generator
