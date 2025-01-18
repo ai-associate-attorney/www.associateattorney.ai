@@ -36,6 +36,7 @@
                 const response = await fetch('forms_list.json');
                 const data = await response.json();
                 initializeSelectors(data);
+                displayAllForms(data);
             } catch (error) {
                 console.error('Error loading forms:', error);
                 document.getElementById('formsList').innerHTML = 
@@ -106,6 +107,40 @@
                     <h3 class="font-semibold text-lg mb-2">${form.name}</h3>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-sm text-gray-500">${jurisdiction} - ${area}</span>
+                        <a href="${form.path}" 
+                           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
+                            Fill Form
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function displayAllForms(data) {
+            const formsList = document.getElementById('formsList');
+            const allForms = [];
+            
+            // Collect all forms across jurisdictions and areas
+            Object.entries(data.jurisdictions).forEach(([jurisdiction, jurisdictionData]) => {
+                Object.entries(jurisdictionData.areas).forEach(([area, areaData]) => {
+                    areaData.forms.forEach(form => {
+                        allForms.push({
+                            ...form,
+                            jurisdiction,
+                            area
+                        });
+                    });
+                });
+            });
+            
+            // Display first 50 forms
+            const formsToDisplay = allForms.slice(0, 50);
+            
+            formsList.innerHTML = formsToDisplay.map(form => `
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="font-semibold text-lg mb-2">${form.name}</h3>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-sm text-gray-500">${form.jurisdiction} - ${form.area}</span>
                         <a href="${form.path}" 
                            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
                             Fill Form
