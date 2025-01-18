@@ -15,7 +15,7 @@ def generate_forms_list():
             "areas": {}
         }
         
-        # Get all areas of law for this jurisdiction
+        # Get all areas of law for this jurisdiction for e.g. California or New York
         jurisdiction_path = os.path.join(jurisdiction)
         for area in os.listdir(jurisdiction_path):
             area_path = os.path.join(jurisdiction_path, area)
@@ -26,15 +26,16 @@ def generate_forms_list():
                 "forms": []
             }
             
-            # Get all form directories in this area
+            # Get all form directories in this area for e.g. family-law
             for form_dir in os.listdir(area_path):
                 form_dir_path = os.path.join(area_path, form_dir)
                 if not os.path.isdir(form_dir_path) or form_dir.startswith('.'):
                     continue
                     
-                # Look for *-fillable.pdf in the form directory
+                # Look for *-fillable.pdf in the form directory here form_dir_path is california/family-law/fl-300
+                # print(form_dir_path)
                 for file in os.listdir(form_dir_path):
-                    if file.endswith('-fillable.pdf'):
+                    if file.endswith('- fillable.pdf'):
                         form_desc = file[:-12]  # Remove '-fillable.pdf'
                         form_data = {
                             "id": form_dir,
