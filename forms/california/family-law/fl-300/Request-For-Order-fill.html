@@ -69,67 +69,138 @@
             </div>
         `;
         
-        // Handle message sending
+        // Add field mapping and state management
+        let currentField = null;
+        const fieldMappings = {
+            "name": "FillText123",
+            "address": "FillText122",
+            "phone": "FillText121",
+            "email": "FillText120",
+            // Add more field mappings as needed
+        };
+
+        // Enhanced sendMessage function
         async function sendMessage() {
             const userInput = document.getElementById('userInput');
             const message = userInput.value.trim();
             if (!message) return;
 
-            const chatMessages = document.getElementById('chatMessages');
-            chatMessages.innerHTML += `
-                <div class="flex justify-end">
-                    <div class="bg-blue-600 text-white rounded-lg p-4 max-w-[80%]">
-                        <p>${message}</p>
-                    </div>
-                </div>
-            `;
-
+            // Add user message to chat
+            addMessageToChat(message, 'user');
             userInput.value = '';
-            
+
             try {
-                // Fetch the PDF document
+                // Fetch and load PDF
                 const existingPdfBytes = await fetch(pdfPath).then(res => res.arrayBuffer());
-                
-                // Load the PDF document
                 const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
-                
-                // Get the form from the document
                 const form = pdfDoc.getForm();
                 
-                // Fill the form field (this is a simple example - you'll need to add logic to determine field names)
+                // Get all form fields for debugging
                 const fields = form.getFields();
                 console.log('Available fields:', fields.map(f => f.getName()));
-                
-                // For this example, let's assume we're filling the first text field
-                const textField = form.getTextField(fields[0].getName());
-                textField.setText(message);
-                
-                // Save the PDF
-                const pdfBytes = await pdfDoc.save();
-                
-                // Create a blob from the PDF bytes
-                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-                const url = URL.createObjectURL(blob);
-                
-                // Update the PDF viewer
-                document.getElementById('pdfViewer').src = url;
-                
-                // Add AI response
-                chatMessages.innerHTML += `
-                    <div class="bg-gray-100 rounded-lg p-4 max-w-[80%]">
-                        <p class="text-gray-700">I've updated the form with your input. You can see the changes in the preview. What else would you like to fill?</p>
-                    </div>
-                `;
+
+                if (!currentField) {
+                    // If no field is selected, try to identify which field the user wants to fill
+                    const fieldMatch = identifyRequestedField(message.toLowerCase());
+                    if (fieldMatch) {
+                        currentField = fieldMatch;
+                        addMessageToChat(`I'll help you fill the ${currentField} field. Please provide the value you'd like to enter.`, 'ai');
+                        return;
+                    }
+                } else {
+                    // We have a current field, so let's fill it
+                    try {
+                        const fieldName = fieldMappings[currentField];
+                        const textField = form.getTextField(fieldName);
+                        
+                        // Validate input before filling
+                        const validatedInput = validateFieldInput(currentField, message);
+                        if (validatedInput.error) {
+                            addMessageToChat(validatedInput.error, 'ai');
+                            return;
+                        }
+                        
+                        textField.setText(validatedInput.value);
+                        
+                        // Save and display the updated PDF
+                        const pdfBytes = await pdfDoc.save();
+                        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                        const url = URL.createObjectURL(blob);
+                        document.getElementById('pdfViewer').src = url;
+                        
+                        addMessageToChat(`I've updated the ${currentField} field. What else would you like to fill?`, 'ai');
+                        currentField = null;
+                    } catch (error) {
+                        console.error('Error filling field:', error);
+                        addMessageToChat(`Sorry, I couldn't fill the ${currentField} field. Please try again.`, 'ai');
+                        currentField = null;
+                    }
+                }
             } catch (error) {
-                console.error('Error filling PDF:', error);
-                chatMessages.innerHTML += `
-                    <div class="bg-gray-100 rounded-lg p-4 max-w-[80%]">
-                        <p class="text-gray-700">Sorry, I encountered an error while filling the form. Please try again.</p>
-                    </div>
-                `;
+                console.error('Error processing PDF:', error);
+                addMessageToChat('Sorry, I encountered an error while processing the form. Please try again.', 'ai');
             }
+        }
+
+        // Helper function to add messages to chat
+        function addMessageToChat(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageHTML = sender === 'user' 
+                ? `<div class="flex justify-end">
+                     <div class="bg-blue-600 text-white rounded-lg p-4 max-w-[80%]">
+                         <p>${message}</p>
+                     </div>
+                   </div>`
+                : `<div class="bg-gray-100 rounded-lg p-4 max-w-[80%]">
+                     <p class="text-gray-700">${message}</p>
+                   </div>`;
             
+            chatMessages.innerHTML += messageHTML;
             chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Helper function to identify which field the user wants to fill
+        function identifyRequestedField(message) {
+            const fieldKeywords = {
+                name: ['name', 'full name'],
+                address: ['address', 'location', 'residence'],
+                phone: ['phone', 'telephone', 'contact number'],
+                email: ['email', 'e-mail', 'electronic mail']
+                // Add more field keywords as needed
+            };
+
+            for (const [field, keywords] of Object.entries(fieldKeywords)) {
+                if (keywords.some(keyword => message.includes(keyword))) {
+                    return field;
+                }
+            }
+            return null;
+        }
+
+        // Helper function to validate field input
+        function validateFieldInput(field, value) {
+            switch (field) {
+                case 'phone':
+                    const phoneRegex = /^\d{10}$/;
+                    if (!phoneRegex.test(value.replace(/\D/g, ''))) {
+                        return {
+                            error: 'Please provide a valid 10-digit phone number.'
+                        };
+                    }
+                    return { value: value.replace(/\D/g, '') };
+                    
+                case 'email':
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(value)) {
+                        return {
+                            error: 'Please provide a valid email address.'
+                        };
+                    }
+                    return { value };
+                    
+                default:
+                    return { value };
+            }
         }
 
         // Handle enter key
