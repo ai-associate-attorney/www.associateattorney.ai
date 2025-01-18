@@ -11,6 +11,11 @@
     
     <div class="mb-8 flex flex-wrap gap-4">
         <div class="w-full md:w-64">
+            <label for="search" class="block text-sm font-medium text-gray-700 mb-2">Search Forms</label>
+            <input type="text" id="search" placeholder="Search forms..." class="w-full p-2 border rounded-md">
+        </div>
+        
+        <div class="w-full md:w-64">
             <label for="jurisdiction" class="block text-sm font-medium text-gray-700 mb-2">Jurisdiction</label>
             <select id="jurisdiction" class="w-full p-2 border rounded-md">
                 <option value="">Select Jurisdiction</option>
@@ -68,6 +73,20 @@
                 const selectedArea = areaSelect.value;
                 displayForms(data, selectedJurisdiction, selectedArea);
             });
+
+            // Handle search input
+            const searchInput = document.getElementById('search');
+            searchInput.addEventListener('input', () => {
+                const selectedJurisdiction = jurisdictionSelect.value;
+                const selectedArea = areaSelect.value;
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                if (selectedJurisdiction && selectedArea) {
+                    displayForms(data, selectedJurisdiction, selectedArea, searchTerm);
+                } else {
+                    displayAllForms(data, searchTerm);
+                }
+            });
         }
 
         function updateAreaSelect(data, jurisdiction) {
@@ -116,7 +135,7 @@
             `).join('');
         }
 
-        function displayAllForms(data) {
+        function displayAllForms(data, searchTerm = '') {
             const formsList = document.getElementById('formsList');
             const allForms = [];
             
@@ -133,9 +152,19 @@
                 });
             });
             
-            // Display first 50 forms
-            const formsToDisplay = allForms.slice(0, 50);
+            // Filter forms based on search term
+            const filteredForms = searchTerm ? 
+                allForms.filter(form => form.name.toLowerCase().includes(searchTerm)) : 
+                allForms;
             
+            // Display first 50 filtered forms
+            const formsToDisplay = filteredForms.slice(0, 50);
+            
+            if (formsToDisplay.length === 0) {
+                formsList.innerHTML = '<p class="text-gray-600">No forms found matching your search.</p>';
+                return;
+            }
+
             formsList.innerHTML = formsToDisplay.map(form => `
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="font-semibold text-lg mb-2">${form.name}</h3>
