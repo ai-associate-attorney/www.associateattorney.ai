@@ -53,6 +53,7 @@
         const formId = pathParts[pathParts.length - 2]; // Gets the form directory name (fl-300)
         const formDir = pathParts.slice(1, -1).join('/'); // Gets the directory path (forms/california/family-law/fl-300)
         const pdfPath = `/${formDir}/Request-For-Order-fillable.pdf`;
+        console.log(pdfPath);
         
         // Initialize the form
         document.getElementById('formName').textContent = formId.toUpperCase();
