@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/forms/(.*)",
+      "destination": "https://forms-9tbfrcghs-scs-projects-83c4512e.vercel.app"
+    }
+  ]
+}
