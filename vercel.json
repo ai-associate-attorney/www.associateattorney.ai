@@ -7,6 +7,10 @@
     {
       "source": "/cases/(.*)",
       "destination": "https://cases-scs-projects-83c4512e.vercel.app/$1"
+    },
+    {
+      "source": "/blogs/(.*)",
+      "destination": "https://blogs-gray-omega.vercel.app/$1"
     }
   ]
 }
