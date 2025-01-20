@@ -6,7 +6,7 @@
     },
     {
       "source": "/cases/(.*)",
-      "destination": "https://cases-kohl.vercel.app/$1"
+      "destination": "https://cases-scs-projects-83c4512e.vercel.app/$1"
     }
   ]
 }
