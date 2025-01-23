@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/forms/(.*)",
-      "destination": "https://forms-1bz74dyhk-scs-projects-83c4512e.vercel.app/$1"
+      "destination": "https://forms-dostgzcf9-scs-projects-83c4512e.vercel.app/$1"
     },
     {
       "source": "/cases/(.*)",
