@@ -11,6 +11,10 @@
     {
       "source": "/blogs/(.*)",
       "destination": "https://blogs-gray-omega.vercel.app/$1"
+    },
+    {
+      "source": "/onboarding/(.*)",
+      "destination": "https://onboarding-phi-virid.vercel.app/$1"
     }
   ]
 }
