@@ -9,9 +9,7 @@ const Header = () => {
           <img
             src="/logo.png"
             alt="AssociateAttorney.ai Logo"
-            width={160}
-            height={160}
-            className="h-8 w-auto"
+            className="w-[120px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[240px] h-auto"
           />
         </Link>
         <nav className="flex items-center gap-6">
