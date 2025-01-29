@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Associate Attorney - Your AI-Powered Legal Assistant</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Facebook Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID');
+        fbq('track', 'PageView');
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR_GA_ID');
+    </script>
+
+    <!-- Google Ads Conversion Tracking -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-YOUR_CONVERSION_ID"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-blue-900">AI Associate Attorney</h1>
+                <div class="flex gap-4">
+                    <a href="https://talent.associateattorney.ai" class="text-blue-600 hover:text-blue-800 px-4 py-2">Hire</a>
+                    <a href="https://app.associateattorney.ai/login" class="text-blue-600 hover:text-blue-800 px-4 py-2">Login</a>
+                    <a href="https://app.associateattorney.ai/signup" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Sign Up</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-blue-900 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Transform Your Legal Practice with AI</h2>
+            <p class="text-xl mb-8">Your intelligent legal assistant that writes motions, handles discovery, and more.</p>
+            <button class="bg-white text-blue-900 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100">
+                Start Free Trial
+            </button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center mb-12">What Our AI Can Do For You</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="p-6 border rounded-lg">
+                    <h3 class="font-semibold mb-2">Write Motions</h3>
+                    <p class="text-gray-600">Automated motion drafting with legal precision</p>
+                </div>
+                <div class="p-6 border rounded-lg">
+                    <h3 class="font-semibold mb-2">Discovery Requests</h3>
+                    <p class="text-gray-600">Efficient response handling for discovery</p>
+                </div>
+                <div class="p-6 border rounded-lg">
+                    <h3 class="font-semibold mb-2">Goal Setting</h3>
+                    <p class="text-gray-600">Smart legal strategy planning</p>
+                </div>
+                <div class="p-6 border rounded-lg">
+                    <h3 class="font-semibold mb-2">Task Management</h3>
+                    <p class="text-gray-600">Streamlined legal workflow organization</p>
+                </div>
+                <div class="p-6 border rounded-lg">
+                    <h3 class="font-semibold mb-2">Legal Filings</h3>
+                    <p class="text-gray-600">Automated document preparation</p>
+                </div>
+                <div class="p-6 border rounded-lg">
+                    <h3 class="font-semibold mb-2">Legal Research</h3>
+                    <p class="text-gray-600">AI-powered case law analysis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="bg-gray-50 py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold mb-8">Simple, Transparent Pricing</h2>
+            <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-4">Start Free</h3>
+                <p class="mb-4">Get up to 100 MB storage at no cost</p>
+                <p class="text-sm text-gray-600">Additional storage available for premium users</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet Our AI Attorneys Section -->
+    <section class="relative py-24 from-neutral-900 overflow-hidden">
+        <div class="relative container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 text-center">Meet our AI Attorneys</h2>
+            <p class="text-xl text-center max-w-3xl mx-auto mb-16">
+                Our AI Attorneys are not just legal assistants - they are your digital workers. With 24/7 operations, they never stop working.
+            </p>
+
+            <div id="attorney-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto text-white">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="bg-gray-50 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center mb-8">Contact Us</h2>
+            <div class="max-w-lg mx-auto">
+                <div class="flex flex-col space-y-4">
+                    <p class="flex items-center"><span class="font-semibold w-24">Phone:</span> 775-443-6747</p>
+                    <p class="flex items-center"><span class="font-semibold w-24">Email:</span> vikas@associateattorney.ai</p>
+                    <p class="flex items-center"><span class="font-semibold w-24">Address:</span> 101 S. California Ave. #D100A Palo Alto, CA 94306</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">&copy; 2024 AI Associate Attorney. All rights reserved.</p>
+            <p class="text-sm mt-2">Legal disclaimer: Results may vary. AI assistance should be reviewed by qualified legal professionals.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hardcoded attorney data to avoid CORS issues
+        const attorneys = [
+            {
+                "id": 4,
+                "name": "Eleanor",
+                "image_url": "https://oqdnbpmmgntqtigstaow.supabase.co/storage/v1/object/public/attorneys/images/wmec3dvqde.jpg",
+                "video_url": "https://oqdnbpmmgntqtigstaow.supabase.co/storage/v1/object/public/attorneys/videos/ql3ocwfh01b.mp4",
+                "system_prompt": "Test prompt",
+                "specialty": "Family law",
+                "jurisdiction": "California",
+                "created_at": "2025-01-08T10:08:23.000219+00:00",
+                "created_by": "4d15c01c-a1f2-454a-a187-db2e51069773",
+                "updated_at": "2025-01-08T10:25:09.859+00:00"
+            },
+            {
+                "id": 3,
+                "name": "Julian",
+                "image_url": "https://oqdnbpmmgntqtigstaow.supabase.co/storage/v1/object/public/attorneys/images/5hokbk7905t.jpg",
+                "video_url": "https://oqdnbpmmgntqtigstaow.supabase.co/storage/v1/object/public/attorneys/videos/ymhkgwowo28.mp4",
+                "system_prompt": "Test prompt",
+                "specialty": "Criminal law",
+                "jurisdiction": "California",
+                "created_at": "2025-01-07T19:18:41.567072+00:00",
+                "created_by": "6382d572-4a9e-4058-a7d5-46a125401063",
+                "updated_at": "2025-01-07T19:18:41.567072+00:00"
+            }
+        ];
+
+        function renderAIAttorneys() {
+            const attorneyContainer = document.querySelector('#attorney-grid');
+            
+            attorneyContainer.innerHTML = attorneys.map(attorney => `
+                <div class="relative rounded-3xl overflow-hidden bg-gradient-to-b from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm">
+                    <div class="absolute top-4 left-4 z-10 flex items-center gap-3">
+                        <span class="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-sm font-medium">
+                            ${attorney.name}
+                        </span>
+                        <span class="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-sm font-medium flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M11.983 1.907a.75.75 0 00-1.292-.657l-8.5 9.5a.75.75 0 00.158 1.115l8.5 5.5a.75.75 0 001.151-.63V1.907z"/>
+                            </svg>
+                            ${attorney.jurisdiction}
+                        </span>
+                    </div>
+                    
+                    <div class="relative aspect-[4/5]">
+                        <img 
+                            src="${attorney.image_url}"
+                            alt="AI Attorney ${attorney.name}"
+                            class="w-full h-full object-cover"
+                        >
+                        <video 
+                            class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
+                            loop
+                            muted
+                            playsinline
+                        >
+                            <source src="${attorney.video_url}" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md rounded-2xl p-4 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="${attorney.image_url}" class="w-10 h-10 rounded-full" alt="${attorney.name}">
+                            <div>
+                                <div class="text-sm">${attorney.name}</div>
+                                <div class="text-sm font-medium">${attorney.specialty}</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/>
+                                </svg>
+                            </button>
+                            <button class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M17.924 2.617a.997.997 0 00-.215-.322l-.004-.004A.997.997 0 0017 2h-4a1 1 0 100 2h1.586l-3.293 3.293a1 1 0 001.414 1.414L16 5.414V7a1 1 0 102 0V3a.997.997 0 00-.076-.383z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Video autoplay initialization remains the same
+            document.querySelectorAll('video').forEach(video => {
+                video.classList.remove('opacity-0');
+                video.setAttribute('autoplay', '');
+                video.setAttribute('loop', '');
+                video.setAttribute('muted', '');
+                video.setAttribute('playsinline', '');
+                video.play().catch(function(error) {
+                    console.log("Video play failed:", error);
+                });
+            });
+        }
+
+        // Load attorneys when the page loads
+        document.addEventListener('DOMContentLoaded', renderAIAttorneys);
+    </script>
+</body>
+</html>
