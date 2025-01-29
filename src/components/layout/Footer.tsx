@@ -40,7 +40,7 @@ const Footer = () => {
         <div className="text-center space-y-4">
           <div className="flex justify-center gap-4">
             <a
-              href="#"
+              href="https://github.com/ai-associate-attorney"
               className="text-slate-300 hover:text-white transition-colors"
               aria-label="GitHub"
             >
@@ -49,7 +49,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/company/associate-attorney-ai"
               className="text-slate-300 hover:text-white transition-colors"
               aria-label="LinkedIn"
             >
