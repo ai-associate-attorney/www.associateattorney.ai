@@ -1,10 +1,20 @@
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { Check, Github } from "lucide-react";
 
 const HeroSection = () => {
   return (
     <section className="min-h-screen pt-32 pb-24 flex flex-col items-center justify-center">
       <div className="max-w-layout mx-auto px-6 text-center">
+        <a
+          href="https://github.com/ai-associate-attorney"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white text-sm font-medium mb-6 hover:bg-slate-800 transition-colors"
+        >
+          <Github className="w-4 h-4" />
+          View our code on GitHub
+        </a>
+        
         <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-50 text-blue-600 text-sm font-medium mb-8">
           Premium Legal Services at 1/10th The Cost
         </div>
