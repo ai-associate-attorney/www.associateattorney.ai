@@ -46,6 +46,15 @@ export default {
       maxWidth: {
         "layout": "1152px", // max-w-6xl equivalent
       },
+      keyframes: {
+        scroll: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' }
+        }
+      },
+      animation: {
+        'scroll': 'scroll 30s linear infinite'
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

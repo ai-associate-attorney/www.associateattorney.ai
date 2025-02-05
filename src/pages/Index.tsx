@@ -5,6 +5,7 @@ import PlatformOverview from "@/components/sections/PlatformOverview";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import StatisticsSection from "@/components/sections/StatisticsSection";
 import CTASection from "@/components/sections/CTASection";
+import { TrustedBy } from "@/components/sections/trusted-by";
 
 const Index = () => {
   return (
@@ -13,6 +14,7 @@ const Index = () => {
       <main>
         <HeroSection />
         <PlatformOverview />
+        <TrustedBy />
         <FeaturesSection />
         <StatisticsSection />
         <CTASection />
