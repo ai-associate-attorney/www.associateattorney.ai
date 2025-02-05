@@ -18,10 +18,14 @@ const clients: Client[] = [
 export function TrustedBy() {
   const clients = [
     {
-      name: "Company One",
+      name: "West View Law Group",
       logo: "/wvl.png",
       alt: "Company One logo"
-    },
+    }, {
+        name: "Oak View Law Group",
+        logo: "/ovl.jpg",
+        alt: "Company One logo"
+      },
     // Add at least 8-10 clients for smooth animation
   ]
 
