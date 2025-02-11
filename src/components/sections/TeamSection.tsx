@@ -18,9 +18,9 @@ const TeamSection = () => {
           to revolutionize legal services accessibility.
         </p>
 
-        <div className="mt-16 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="mt-16 flex justify-center max-w-4xl mx-auto">
           {teamMembers.map((member, index) => (
-            <div key={index} className="bg-white rounded-2xl shadow-sm p-8">
+            <div key={index} className="bg-white rounded-2xl shadow-sm p-8 w-full max-w-md">
               <img
                 src={member.image}
                 alt={member.name}
@@ -70,13 +70,6 @@ const teamMembers = [
     image: "/image.png",
     linkedin: "https://www.linkedin.com/in/vikaskedia/",
     email: "vikas@associateattorney.ai"
-  },
-  {
-    name: "Jessica Mahoney",
-    role: "Legal Innovation and Integration Officer",
-    image: "/jessica.jpg",
-    linkedin: "https://www.linkedin.com/in/jessica-mahoney-7769a0349",
-    email: "jessica@westviewlegal.com"
   }
 ];
 
