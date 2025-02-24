@@ -29,19 +29,7 @@ const addGoogleAds = () => {
   document.head.appendChild(configScript);
 };
 
-// Add Leadsy pixel
-const addLeadsyPixel = () => {
-  const script = document.createElement('script');
-  script.id = 'vtag-ai-js';
-  script.async = true;
-  script.src = 'https://r2.leadsy.ai/tag.js';
-  script.setAttribute('data-pid', 'WazgcIQXapTwAIYy');
-  script.setAttribute('data-version', '062024');
-  document.head.appendChild(script);
-};
-
 // Initialize tracking when the app starts
 addGoogleAds();
-addLeadsyPixel();
 
 createRoot(document.getElementById("root")!).render(<App />);
