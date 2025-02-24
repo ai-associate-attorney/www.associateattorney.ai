@@ -29,13 +29,13 @@ const HeroSection = () => {
           help and complete documentation at a fraction of traditional costs.
         </p>
 
-        <div className="mt-12 flex flex-col md:flex-row gap-4 justify-center">
+        <div className="mt-12 flex flex-col md:flex-row gap-4 justify-center items-center">
           <Button 
             size="lg" 
             className="bg-slate-900 text-white hover:bg-slate-800"
             onClick={() => window.location.href = 'https://app.associateattorney.ai/signup'}
           >
-            Start Using Platform
+            Free Initial Consultation
           </Button>
           <Button
             size="lg"
@@ -44,6 +44,16 @@ const HeroSection = () => {
             onClick={() => window.location.href = 'https://www.associateattorney.ai/onboarding/'}
           >
             Join as an Attorney
+          </Button>
+          <Button
+            size="lg"
+            className="bg-white text-blue-600 hover:bg-blue-50 border-2 border-blue-200 
+            font-semibold shadow-sm transition-all duration-200 hover:shadow-md 
+            flex items-center gap-2 px-8"
+            onClick={() => window.location.href = 'https://calendly.com/vikas-associateattorney'}
+          >
+            Book a Demo
+            <span className="text-xl ml-1">→</span>
           </Button>
         </div>
 
