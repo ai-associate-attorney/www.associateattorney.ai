@@ -50,10 +50,33 @@ export default {
         scroll: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-100%)' }
-        }
+        },
+        gradient: {
+          '0%, 100%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+        },
+        glow: {
+          '0%, 100%': {
+            'box-shadow': '0 0 20px 2px rgba(255, 255, 255, 0.3)',
+            opacity: '1'
+          },
+          '50%': {
+            'box-shadow': '0 0 30px 4px rgba(255, 255, 255, 0.5)',
+            opacity: '0.8'
+          },
+        },
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
       },
       animation: {
-        'scroll': 'scroll 30s linear infinite'
+        'scroll': 'scroll 30s linear infinite',
+        'gradient-x': 'gradient 15s ease infinite',
+        'pulse-glow': 'glow 2s ease-in-out infinite',
+        'fade-in': 'fadeIn 0.5s ease-out',
+        'fade-in-delay': 'fadeIn 0.5s ease-out 0.2s',
+        'fade-in-delay-2': 'fadeIn 0.5s ease-out 0.4s',
       }
     },
   },

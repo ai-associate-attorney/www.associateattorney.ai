@@ -17,7 +17,7 @@ const Index = () => {
         <HeroSection />
         <VideoSection />
         <PlatformOverview />
-        <TrustedBy />
+       
         <FeaturesSection />
         <StatisticsSection />
         <TeamSection />
