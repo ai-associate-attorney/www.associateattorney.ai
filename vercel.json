@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/forms/(.*)",
-      "destination": "https://forms-vue-app-v2.vercel.app/$1"
+      "destination": "https://forms-vue-app-v2.vercel.app/index.html"
     },
     {
       "source": "/cases/(.*)",
