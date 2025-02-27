@@ -23,7 +23,7 @@ const CTASection = () => {
                       transition-all duration-300 transform hover:scale-105"
             asChild
           >
-            <a href="https://www.associateattorney.ai/trial/" className="flex items-center gap-2">
+            <a href="https://app.associateattorney.ai/login" className="flex items-center gap-2">
               Start Free Trial
             </a>
           </Button>
@@ -31,11 +31,11 @@ const CTASection = () => {
           <Button 
             size="lg" 
             variant="outline" 
-            className="border-white text-white hover:bg-white/10 text-lg px-8 py-6
-                      transition-all duration-300"
+            className="bg-blue-500 text-white border-blue-400 hover:bg-blue-600 text-lg px-8 py-6
+                      transition-all duration-300 border-2 font-medium"
             asChild
           >
-            <a href="https://www.associateattorney.ai/demo/" className="flex items-center gap-2">
+            <a href="https://calendly.com/vikas-associateattorney" className="flex items-center gap-2">
               Schedule Demo
             </a>
           </Button>
