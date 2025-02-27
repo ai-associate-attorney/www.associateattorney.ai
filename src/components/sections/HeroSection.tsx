@@ -37,7 +37,7 @@ const HeroSection = () => {
           <Button 
             size="lg" 
             className="bg-green-600 text-white hover:bg-green-700 text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
-            onClick={() => window.location.href = 'https://app.associateattorney.ai/signup'}
+            onClick={() => window.location.href = 'https://www.associateattorney.ai/forms/'}
           >
             <div className="flex flex-col items-center">
               <span className="font-bold">Start Automating Your Forms</span>
@@ -50,7 +50,7 @@ const HeroSection = () => {
               className="bg-white text-orange-600 hover:bg-orange-50 border-2 border-orange-200 
               font-semibold shadow-sm transition-all duration-200 hover:shadow-md 
               rounded-xl py-4 px-8 flex items-center gap-2"
-              onClick={() => window.location.href = 'https://calendly.com/vikas-associateattorney'}
+              onClick={() => window.location.href = 'https://www.youtube.com/watch?v=F5QC4bwsaIk'}
             >
               <span className="font-bold">See Form Automation Demo</span>
               <span className="text-xl">→</span>
