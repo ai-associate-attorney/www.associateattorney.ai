@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/forms/:path*",
+      "source": "/forms/(.*)",
       "destination": "https://forms-vue-app-v2.vercel.app/:path*"
     },
     {
