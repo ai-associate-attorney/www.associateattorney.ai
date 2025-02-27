@@ -16,5 +16,12 @@
       "source": "/onboarding/(.*)",
       "destination": "https://onboarding-phi-virid.vercel.app/$1"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/forms/(.*)",
+      "destination": "https://forms-vue-app-v2.vercel.app/index.html",
+      "statusCode": 200
+    }
   ]
 }
