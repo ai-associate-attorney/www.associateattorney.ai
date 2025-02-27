@@ -128,10 +128,10 @@ const CarAccidentSettlementCalculator: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="pt-20">
-        <div className="bg-gray-100 min-h-screen p-4 md:p-8">
+      <main className="pt-20 flex-1">
+        <div className="bg-gray-100 p-4 md:p-8">
           <div className="container mx-auto max-w-7xl">
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Calculator Section */}
