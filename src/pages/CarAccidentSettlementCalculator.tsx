@@ -39,6 +39,7 @@ const CarAccidentSettlementCalculator: React.FC = () => {
   ]);
   const [userInput, setUserInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [activeView, setActiveView] = useState<'chat' | 'calculator'>('chat');
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
@@ -305,11 +306,35 @@ Remember to:
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="pt-20 flex-1">
-        <div className="bg-gray-100 p-4 md:p-8">
-          <div className="container mx-auto max-w-7xl">
-            <div className="flex flex-col lg:flex-row gap-8">
+        <div className="bg-gray-100 min-h-[calc(100vh-5rem)] p-4 md:p-8">
+          <div className="container mx-auto max-w-7xl h-full">
+            {/* Mobile Toggle Buttons */}
+            <div className="lg:hidden mb-4 flex gap-2">
+              <button
+                onClick={() => setActiveView('chat')}
+                className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-colors ${
+                  activeView === 'chat' 
+                    ? 'bg-blue-600 text-white' 
+                    : 'bg-gray-200 text-gray-600'
+                }`}
+              >
+                Chat with AI Assistant
+              </button>
+              <button
+                onClick={() => setActiveView('calculator')}
+                className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-colors ${
+                  activeView === 'calculator' 
+                    ? 'bg-blue-600 text-white' 
+                    : 'bg-gray-200 text-gray-600'
+                }`}
+              >
+                Calculator
+              </button>
+            </div>
+
+            <div className="flex flex-col lg:flex-row gap-8 lg:items-end">
               {/* Calculator Section */}
-              <div className="flex-1 form_wrapper_1">
+              <div className={`flex-1 ${activeView === 'calculator' ? 'block' : 'hidden lg:block'}`}>
                 <div className="bg-white rounded-lg shadow-lg p-8 form_wrapper_2">
                   <div className="text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
@@ -370,8 +395,8 @@ Remember to:
               </div>
 
               {/* Chat Interface */}
-              <div className="lg:w-96 flex-1">
-                <div className="bg-white rounded-lg shadow-lg flex flex-col h-[600px]">
+              <div className={`lg:w-96 ${activeView === 'chat' ? 'block' : 'hidden lg:block'}`}>
+                <div className="bg-white rounded-lg shadow-lg flex flex-col h-[calc(100vh-8rem)] lg:h-[600px]">
                   {/* Fixed Header */}
                   <div className="h-16 px-6 flex items-center border-b flex-shrink-0">
                     <h3 className="font-semibold">Chat with AI Assistant</h3>
