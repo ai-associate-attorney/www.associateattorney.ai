@@ -20,13 +20,5 @@
       "source": "/forms/(.*)",
       "destination": "https://forms-vue-app-v2.vercel.app/$1"
     }
-  ],
-  "functions": {
-    "api/deepseek-direct.js": {
-      "maxDuration": 60
-    },
-    "api/openai-direct.js": {
-      "maxDuration": 60
-    }
-  }
+  ]
 }
