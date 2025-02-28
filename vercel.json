@@ -11,14 +11,6 @@
     {
       "source": "/onboarding/(.*)",
       "destination": "https://onboarding-phi-virid.vercel.app/$1"
-    },
-    {
-      "source": "/forms",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/forms/:path*",
-      "destination": "/index.html"
     }
   ],
   "functions": {
