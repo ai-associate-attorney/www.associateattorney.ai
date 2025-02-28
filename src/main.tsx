@@ -59,9 +59,29 @@ const addTwitterPixel = () => {
   document.head.appendChild(twitterScript);
 };
 
+// Function to verify tracking scripts are loaded
+const verifyTrackingScripts = () => {
+  // Check Google Ads
+  if (window.dataLayer && typeof window.gtag === 'function') {
+    console.log('Google Ads tracking is properly installed');
+  } else {
+    console.warn('Google Ads tracking may not be properly installed');
+  }
+  
+  // Check Twitter Pixel
+  if (typeof window.twq === 'function') {
+    console.log('Twitter Pixel tracking is properly installed');
+  } else {
+    console.warn('Twitter Pixel tracking may not be properly installed');
+  }
+};
+
 // Initialize everything when the app starts
 setupCSP();
 addGoogleAds();
 addTwitterPixel();
+
+// Verify tracking scripts after a short delay to allow them to load
+setTimeout(verifyTrackingScripts, 2000);
 
 createRoot(document.getElementById("root")!).render(<App />);
