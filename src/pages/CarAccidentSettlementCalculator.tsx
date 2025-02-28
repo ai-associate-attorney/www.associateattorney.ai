@@ -17,6 +17,8 @@ interface DamageInputs {
   generalDamagesMultiplier: number;
 }
 
+const apiBaseUrl = 'https://cases-vue-app.vercel.app/api/openai-direct';
+
 const CarAccidentSettlementCalculator: React.FC = () => {
   const [inputs, setInputs] = useState<DamageInputs>({
     medicalBills: 0,
@@ -56,6 +58,28 @@ const CarAccidentSettlementCalculator: React.FC = () => {
     return totalDamages;
   };
 
+  const formatAIResponse = (text: string) => {
+    // Convert markdown list items
+    text = text.replace(/^\s*[-*]\s+/gm, '• ');
+    
+    // Convert markdown headers
+    text = text.replace(/^#{1,6}\s+(.+)$/gm, '<strong>$1</strong>');
+    
+    // Convert markdown bold
+    text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    
+    // Convert markdown italics
+    text = text.replace(/_(.+?)_/g, '<em>$1</em>');
+    
+    // Convert newlines to <br/>
+    text = text.replace(/\n\n/g, '<br/><br/>');
+    
+    // Convert markdown horizontal rules
+    text = text.replace(/^---$/gm, '<hr class="my-4"/>');
+    
+    return text;
+  };
+
   const handleSendMessage = async () => {
     if (!userInput.trim() || isLoading) return;
 
@@ -67,18 +91,95 @@ const CarAccidentSettlementCalculator: React.FC = () => {
     setUserInput('');
     setIsLoading(true);
 
-    // Here you would typically make an API call to your AI service
-    // For now, we'll just simulate a response
-    setTimeout(() => {
+    const requiredFields = {
+      medicalBills: 'Medical Bills',
+      futureMedicalExpenses: 'Future Medical Expenses',
+      propertyDamage: 'Property Damage',
+      lostWages: 'Lost Wages',
+      futureLostWages: 'Future Lost Wages'
+    };
+
+    const missingFields = Object.entries(requiredFields)
+      .filter(([key]) => inputs[key] === 0)
+      .map(([_, label]) => label);
+
+    const systemPrompt = `You are an AI assistant helping with car accident settlement calculations.
+Current status:
+${Object.entries(requiredFields)
+  .map(([key, label]) => `${label}: ${inputs[key] === 0 ? 'Not provided' : '$' + inputs[key].toLocaleString()}`)
+  .join('\n')}
+General Damages Multiplier: ${inputs.generalDamagesMultiplier}x
+
+Your role:
+1. If there are missing fields (${missingFields.join(', ')}), ask for them one at a time.
+2. Explain that the General Damages Multiplier (currently ${inputs.generalDamagesMultiplier}x) can be adjusted between 1.5x to 5x based on injury severity.
+3. When all fields are provided, show:
+   - The estimated settlement: $${calculateSettlement().toLocaleString()}
+   - A brief summary of what this means, including:
+     * Total economic damages (medical bills, property damage, lost wages)
+     * How the multiplier affects the final amount
+     * What factors might increase or decrease the actual settlement
+
+   \n\n
+   ---
+   💡 You can experiment with different values using the calculator form on the left to see how changes affect the estimated settlement amount.
+
+Guidelines:
+- Ask for missing information naturally and conversationally
+- Explain why each piece of information is important
+- Help users understand how the multiplier affects their settlement
+- Provide context about what each field means
+- End with a clear, concise summary when all information is provided`;
+
+    try {
+      const response = await fetch(apiBaseUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [
+            {
+              role: 'system',
+              content: systemPrompt
+            },
+            ...messages.map(msg => ({
+              role: msg.type === 'user' ? 'user' : 'assistant',
+              content: msg.text
+            })),
+            {
+              role: 'user',
+              content: userInput.trim()
+            }
+          ]
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('API request failed');
+      }
+
+      const data = await response.json();
+      
       setMessages([
         ...newMessages,
         { 
           type: 'assistant', 
-          text: `I see you're calculating a settlement with total damages of $${calculateSettlement().toLocaleString()}. How else can I help you understand this calculation?`
+          text: formatAIResponse(data.choices[0].message.content)
         }
       ]);
+    } catch (error) {
+      console.error('Error:', error);
+      setMessages([
+        ...newMessages,
+        { 
+          type: 'assistant', 
+          text: 'Sorry, there was an error processing your request.' 
+        }
+      ]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const MoneyInput = ({ label, field }: { label: string; field: keyof DamageInputs }) => {
@@ -135,8 +236,8 @@ const CarAccidentSettlementCalculator: React.FC = () => {
           <div className="container mx-auto max-w-7xl">
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Calculator Section */}
-              <div className="flex-1">
-                <div className="bg-white rounded-lg shadow-lg p-8">
+              <div className="flex-1 form_wrapper_1">
+                <div className="bg-white rounded-lg shadow-lg p-8 form_wrapper_2">
                   <div className="text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                       Car Accident Settlement Calculator
@@ -196,28 +297,35 @@ const CarAccidentSettlementCalculator: React.FC = () => {
               </div>
 
               {/* Chat Interface */}
-              <div className="lg:w-96 flex flex-col">
-                <div className="bg-white rounded-lg shadow-lg flex flex-col h-full">
+              <div className="lg:w-96 flex-1">
+                <div className="bg-white rounded-lg shadow-lg flex flex-col" style={{ height: '100%' }}>
+                  {/* Fixed Header */}
                   <div className="h-16 px-6 flex items-center border-b flex-shrink-0">
                     <h3 className="font-semibold">Chat with AI Assistant</h3>
                   </div>
                   
-                  <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                    {messages.map((message, index) => (
-                      <div
-                        key={index}
-                        className={`p-4 rounded-lg ${
-                          message.type === 'user'
-                            ? 'bg-blue-100 ml-8'
-                            : 'bg-gray-100 mr-8'
-                        }`}
-                      >
-                        {message.text}
+                  {/* Scrollable Messages Area */}
+                  <div className="flex-1 overflow-hidden scrollable_messages_area_1">
+                    <div className="h-full overflow-y-auto p-4">
+                      <div className="space-y-4">
+                        {messages.map((message, index) => (
+                          <div
+                            key={index}
+                            className={`p-4 rounded-lg ${
+                              message.type === 'user'
+                                ? 'bg-blue-100 ml-8'
+                                : 'bg-gray-100 mr-8'
+                            }`}
+                          >
+                            <div dangerouslySetInnerHTML={{ __html: message.text }} />
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    </div>
                   </div>
 
-                  <div className="border-t p-4 flex-shrink-0">
+                  {/* Fixed Input Area */}
+                  <div className="h-16 border-t p-4 flex-shrink-0">
                     <div className="flex gap-2">
                       <Input
                         type="text"
