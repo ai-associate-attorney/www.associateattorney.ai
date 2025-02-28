@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Input } from "@/components/ui/input";
@@ -16,6 +16,8 @@ interface DamageInputs {
   futureLostWages: number;
   generalDamagesMultiplier: number;
 }
+
+const AUTO_UPDATE_FROM_AI = true; // This can be controlled programmatically
 
 const apiBaseUrl = 'https://cases-vue-app.vercel.app/api/openai-direct';
 
@@ -38,6 +40,19 @@ const CarAccidentSettlementCalculator: React.FC = () => {
   const [userInput, setUserInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   const handleInputChange = (field: keyof DamageInputs, value: string) => {
     const numValue = value === '' ? 0 : parseFloat(value) || 0;
     setInputs(prev => ({
@@ -59,6 +74,9 @@ const CarAccidentSettlementCalculator: React.FC = () => {
   };
 
   const formatAIResponse = (text: string) => {
+    // Remove the JSON block first
+    text = text.replace(/```json[\s\S]*?```/g, '');
+    
     // Convert markdown list items
     text = text.replace(/^\s*[-*]\s+/gm, '• ');
     
@@ -77,7 +95,39 @@ const CarAccidentSettlementCalculator: React.FC = () => {
     // Convert markdown horizontal rules
     text = text.replace(/^---$/gm, '<hr class="my-4"/>');
     
+    // Trim any extra whitespace that might be left after removing JSON
+    text = text.trim();
+    
     return text;
+  };
+
+  const extractNumberFromText = (text: string): number | null => {
+    const matches = text.match(/\$?([\d,]+(\.\d{2})?)/);
+    if (matches) {
+      return parseFloat(matches[1].replace(/,/g, ''));
+    }
+    return null;
+  };
+
+  const detectAndUpdateFields = (message: string) => {
+    if (!AUTO_UPDATE_FROM_AI) return;
+
+    try {
+      // Extract JSON block from the message
+      const jsonMatch = message.match(/```json\n([\s\S]*?)\n```/);
+      if (jsonMatch) {
+        const jsonData = JSON.parse(jsonMatch[1]);
+        if (jsonData.detected_fields) {
+          jsonData.detected_fields.forEach((field: { field: keyof DamageInputs, value: number }) => {
+            if (field.value && !isNaN(field.value)) {
+              handleInputChange(field.field, field.value.toString());
+            }
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Error parsing AI response fields:', error);
+    }
   };
 
   const handleSendMessage = async () => {
@@ -104,6 +154,7 @@ const CarAccidentSettlementCalculator: React.FC = () => {
       .map(([_, label]) => label);
 
     const systemPrompt = `You are an AI assistant helping with car accident settlement calculations.
+
 Current status:
 ${Object.entries(requiredFields)
   .map(([key, label]) => `${label}: ${inputs[key] === 0 ? 'Not provided' : '$' + inputs[key].toLocaleString()}`)
@@ -115,21 +166,39 @@ Your role:
 2. Explain that the General Damages Multiplier (currently ${inputs.generalDamagesMultiplier}x) can be adjusted between 1.5x to 5x based on injury severity.
 3. When all fields are provided, show:
    - The estimated settlement: $${calculateSettlement().toLocaleString()}
-   - A brief summary of what this means, including:
-     * Total economic damages (medical bills, property damage, lost wages)
-     * How the multiplier affects the final amount
-     * What factors might increase or decrease the actual settlement
+   - A brief summary of what this means
 
-   \n\n
-   ---
-   💡 You can experiment with different values using the calculator form on the left to see how changes affect the estimated settlement amount.
+Response Format:
+Always include a JSON block at the end of your response in this format:
+\`\`\`json
+{
+  "detected_fields": [
+    {
+      "field": "medicalBills",
+      "value": 5000.00
+    },
+    {
+      "field": "generalDamagesMultiplier",
+      "value": 2.5
+    }
+  ]
+}
+\`\`\`
 
 Guidelines:
 - Ask for missing information naturally and conversationally
 - Explain why each piece of information is important
 - Help users understand how the multiplier affects their settlement
 - Provide context about what each field means
-- End with a clear, concise summary when all information is provided`;
+- Always extract and include any mentioned dollar amounts or multiplier values in the JSON response
+- Valid fields are: medicalBills, futureMedicalExpenses, propertyDamage, lostWages, futureLostWages, generalDamagesMultiplier
+
+Remember to:
+1. Maintain a conversational tone in your main response
+2. Include the JSON block at the end of EVERY response
+3. Only include fields in the JSON that were actually mentioned or discussed in the current message
+4. Parse currency values to numbers (remove $ and commas)
+5. Keep multiplier values between 1.5 and 5.0`;
 
     try {
       const response = await fetch(apiBaseUrl, {
@@ -141,7 +210,7 @@ Guidelines:
           messages: [
             {
               role: 'system',
-              content: systemPrompt
+              content: systemPrompt //"You are an AI assistant helping with date and time" //systemPrompt
             },
             ...messages.map(msg => ({
               role: msg.type === 'user' ? 'user' : 'assistant',
@@ -168,6 +237,10 @@ Guidelines:
           text: formatAIResponse(data.choices[0].message.content)
         }
       ]);
+
+      if (AUTO_UPDATE_FROM_AI) {
+        detectAndUpdateFields(data.choices[0].message.content);
+      }
     } catch (error) {
       console.error('Error:', error);
       setMessages([
@@ -298,41 +371,44 @@ Guidelines:
 
               {/* Chat Interface */}
               <div className="lg:w-96 flex-1">
-                <div className="bg-white rounded-lg shadow-lg flex flex-col" style={{ height: '100%' }}>
+                <div className="bg-white rounded-lg shadow-lg flex flex-col h-[600px]">
                   {/* Fixed Header */}
                   <div className="h-16 px-6 flex items-center border-b flex-shrink-0">
                     <h3 className="font-semibold">Chat with AI Assistant</h3>
                   </div>
                   
                   {/* Scrollable Messages Area */}
-                  <div className="flex-1 overflow-hidden scrollable_messages_area_1">
-                    <div className="h-full overflow-y-auto p-4">
-                      <div className="space-y-4">
-                        {messages.map((message, index) => (
-                          <div
-                            key={index}
-                            className={`p-4 rounded-lg ${
-                              message.type === 'user'
-                                ? 'bg-blue-100 ml-8'
-                                : 'bg-gray-100 mr-8'
-                            }`}
-                          >
-                            <div dangerouslySetInnerHTML={{ __html: message.text }} />
-                          </div>
-                        ))}
-                      </div>
+                  <div className="flex-1 overflow-y-auto p-4" ref={messagesContainerRef}>
+                    <div className="space-y-4">
+                      {messages.map((message, index) => (
+                        <div
+                          key={index}
+                          className={`p-4 rounded-lg ${
+                            message.type === 'user'
+                              ? 'bg-blue-100 ml-8'
+                              : 'bg-gray-100 mr-8'
+                          }`}
+                        >
+                          <div dangerouslySetInnerHTML={{ __html: message.text }} />
+                        </div>
+                      ))}
                     </div>
                   </div>
 
                   {/* Fixed Input Area */}
-                  <div className="h-16 border-t p-4 flex-shrink-0">
+                  <div className="h-24 border-t p-4 flex-shrink-0">
                     <div className="flex gap-2">
                       <Input
                         type="text"
                         placeholder="Type your message..."
                         value={userInput}
                         onChange={(e) => setUserInput(e.target.value)}
-                        onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                        onKeyPress={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault(); // Prevent page scroll
+                            handleSendMessage();
+                          }
+                        }}
                         className="flex-1"
                       />
                       <button
