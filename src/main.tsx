@@ -77,7 +77,7 @@ const verifyTrackingScripts = () => {
 };
 
 // Initialize everything when the app starts
-setupCSP();
+// setupCSP();
 addGoogleAds();
 addTwitterPixel();
 
