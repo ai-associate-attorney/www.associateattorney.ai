@@ -11,6 +11,22 @@ declare global {
   }
 }
 
+// Set up Content Security Policy for tracking scripts
+const setupCSP = () => {
+  // Create meta tag for CSP
+  const metaTag = document.createElement('meta');
+  metaTag.httpEquiv = 'Content-Security-Policy';
+  metaTag.content = `
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.ads-twitter.com https://ads-twitter.com https://ads-api.twitter.com https://analytics.twitter.com;
+    connect-src 'self' https://www.googletagmanager.com https://static.ads-twitter.com https://ads-twitter.com https://ads-api.twitter.com https://analytics.twitter.com;
+    img-src 'self' data: https://www.googletagmanager.com https://static.ads-twitter.com https://ads-twitter.com https://ads-api.twitter.com https://analytics.twitter.com;
+    style-src 'self' 'unsafe-inline';
+    font-src 'self';
+  `;
+  document.head.appendChild(metaTag);
+};
+
 // Add Google Ads tracking
 const addGoogleAds = () => {
   // Add the main gtag.js script
@@ -43,7 +59,8 @@ const addTwitterPixel = () => {
   document.head.appendChild(twitterScript);
 };
 
-// Initialize tracking when the app starts
+// Initialize everything when the app starts
+setupCSP();
 addGoogleAds();
 addTwitterPixel();
 
