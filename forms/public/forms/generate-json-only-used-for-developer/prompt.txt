@@ -1,0 +1,95 @@
+I need you to analyze attached pdf file of the {pdf_form_name} form and generate a structured JSON representation that captures all form requirements and specifications for the AI Attorney application.
+
+Please create a comprehensive JSON schema that includes:
+
+1. Form metadata:
+   - Form title and purpose
+   - Legal references and requirements
+   - Filing instructions
+   - Applicable court jurisdictions
+
+2. Form structure:
+   - All sections and their hierarchical organization
+   - Section dependencies and conditional logic
+   - Required vs optional sections
+
+3. Field specifications for each form element:
+   - Field ID (unique identifier) should be the acroform field ID
+   - Field identifier and display label
+   - Field type (text, textarea, checkbox, radio, date, email, currency, etc.)
+   - PDF AcroForm field ID
+   - Input validation rules and constraints
+   - Dependencies on other fields
+   - Format requirements (date format, text length, etc.)
+   - Help text and user instructions
+   - Default values (if any)
+
+4. Calculated fields:
+   - Computation logic
+   - Source fields
+   - Formula specifications
+
+Key Instructions
+- Extract ALL AcroForm fields, including nested fields inside subforms (`Kids`).
+- Do not skip any fields, even if they are empty or optional.
+- Field ID must match PDF AcroForm field ID exactly.
+- If a field has child fields (`Kids`), include them under the parent section.
+- Checkbox and radio groups must include all possible options.
+- Ensure that the JSON is properly formatted, free of syntax errors, and programmatically parseable.
+- Do not include any explanations, comments, or extraneous text—ONLY return the JSON.
+- Use underscore `_` instead of `.` for hierarchical field names.
+- Include all sections and fields, even if they are not visible or not required.
+
+Please create a comprehensive JSON schema that MUST follow this exact structure:
+{
+  "form_metadata": {
+    "title": "",                              // Form's full title
+    "form_number": "",                        // Form number (e.g., FL-300)
+    "revision_date": "",                      // Form's revision date
+    "purpose": "",                            // Brief description of form's purpose
+    "legal_references": [],                   // Array of relevant legal codes
+    "filing_instructions": "",                // Basic filing instructions
+    "applicable_court_jurisdictions": ""      // Applicable courts
+  },
+  "sections": [
+    {
+      "fieldId": "",                        // Unique section identifier
+      "page": 1,                            // Page number where section appears
+      "sectionNo": "",                      // Section number for ordering start from 0
+      "title": "",                          // Section title
+      "fields": [
+        {
+          "fieldId": "",                    // MUST match PDF AcroForm field ID exactly
+          "label": "",                      // Human-readable field label
+          "value": "",                      // Default empty
+          "type": "",                       // One of: text, textarea, date, email, currency
+          "required": true/false            // Whether field is mandatory
+        },
+        {
+          "fieldId": "",                    // MUST match PDF AcroForm field ID exactly
+          "label": "",                      // Human-readable field label
+          "selected": "false",              // Default false
+          "type": "",                       // One of: checkbox, radio
+          "required": true/false            // Whether field is mandatory
+        },
+        {
+          "fieldId": "",                    // MUST match PDF AcroForm field ID exactly
+          "label": "",                      // Human-readable field label 
+          "type": "checkbox_group",         // One of: checkbox_group, radio_group
+          "required": true/false            // Whether field is mandatory
+          "options": [                      // Array of options if there are multiple options
+            { 
+              "fieldId": "",                  // MUST match PDF AcroForm field ID exactly
+              "label": "",                    // Human-readable field label
+              "selected": false              // Default false
+            }
+          ]
+        },
+      ]
+    },
+    {
+      // Here next section will be added
+    },
+    ... // More sections will be added
+  ]
+}

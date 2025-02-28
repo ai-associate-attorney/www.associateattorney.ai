@@ -1,0 +1,18 @@
+The flow chart is :
+A. API call 1 Request to LLM: 
+1. System prompt: I will send the current state of the form stored in the JSON to the LLM. 
+2. I will ask the LLM to understand the current state of the form and give me a message to show to the user.
+
+B. API call 1 Response:
+1. The LLM will give me a message to show to the user.
+
+C. UI update:
+I will show the message to the user. and wait for the user to type a response.
+
+D. API call 2 Request:
+1. I will send the message the user types to the LLM along with the JSON at time T1.
+2. I will ask the LLM to understand the user message and give me the JSON diff in RFC 6902 format.
+
+E. Our app update:
+1. I will apply the JSON diff to the JSON at time T1 to get the new JSON at time T2.
+2. I will go back to step 1 until the user is done filling the form.

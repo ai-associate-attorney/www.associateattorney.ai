@@ -1,10 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/forms/(.*)",
-      "destination": "https://forms-vue-app-v2.vercel.app/$1"
-    },
-    {
       "source": "/cases/(.*)",
       "destination": "https://cases-vue-app.vercel.app/$1"
     },
@@ -15,6 +11,22 @@
     {
       "source": "/onboarding/(.*)",
       "destination": "https://onboarding-phi-virid.vercel.app/$1"
+    },
+    {
+      "source": "/forms",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/forms/:path*",
+      "destination": "/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "api/deepseek-direct.js": {
+      "maxDuration": 60
+    },
+    "api/openai-direct.js": {
+      "maxDuration": 60
+    }
+  }
 }

@@ -1,0 +1,155 @@
+{
+  "form_metadata": {
+    "title": "Proposed Order and Stipulation to Continue Trial (North District)",
+    "form_number": "LACIV-AV-242",
+    "revision_date": "12/20",
+    "purpose": "To stipulate and order the continuance of trial, Final Status Conference, and related motion/discovery dates.",
+    "legal_references": [],
+    "filing_instructions": "For use in the Personal Injury Courts of the North District within Los Angeles County.",
+    "applicable_court_jurisdictions": "Superior Court of California, County of Los Angeles"
+  },
+  "sections": [
+    {
+      "fieldId": "section_0",
+      "page": 1,
+      "sectionNo": "0",
+      "title": "Case Information",
+      "fields": [
+        {
+          "fieldId": "Field1",
+          "label": "Name and Address of Attorney or Party Without Attorney",
+          "value": "",
+          "type": "text",
+          "required": false
+        },
+        {
+          "fieldId": "Field2",
+          "label": "State Bar Number",
+          "value": "",
+          "type": "text",
+          "required": false
+        },
+        {
+          "fieldId": "Field3",
+          "label": "Telephone Number",
+          "value": "",
+          "type": "text",
+          "required": false
+        },
+        {
+          "fieldId": "Field4",
+          "label": "Email Address",
+          "value": "",
+          "type": "email",
+          "required": false
+        },
+        {
+          "fieldId": "Field5",
+          "label": "Attorney for (Name)",
+          "value": "",
+          "type": "text",
+          "required": false
+        },
+        {
+          "fieldId": "Field6",
+          "label": "Fax Number",
+          "value": "",
+          "type": "text",
+          "required": false
+        },
+        {
+          "fieldId": "Field7",
+          "label": "Courthouse Address",
+          "value": "",
+          "type": "textarea",
+          "required": false
+        },
+        {
+          "fieldId": "Field8",
+          "label": "Plaintiff",
+          "value": "",
+          "type": "text",
+          "required": false
+        },
+        {
+          "fieldId": "Field9",
+          "label": "Defendant",
+          "value": "",
+          "type": "text",
+          "required": false
+        },
+        {
+          "fieldId": "Field10",
+          "label": "Case Number",
+          "value": "",
+          "type": "text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "fieldId": "section_1",
+      "page": 1,
+      "sectionNo": "1",
+      "title": "Trial Continuance Stipulation",
+      "fields": [
+        {
+          "fieldId": "Field11",
+          "label": "Current Trial Date",
+          "value": "",
+          "type": "date",
+          "required": true
+        },
+        {
+          "fieldId": "Field12",
+          "label": "New Trial Date",
+          "value": "",
+          "type": "date",
+          "required": true
+        },
+        {
+          "fieldId": "Field13",
+          "label": "Current Final Status Conference Date",
+          "value": "",
+          "type": "date",
+          "required": true
+        },
+        {
+          "fieldId": "Field14",
+          "label": "New Final Status Conference Date",
+          "value": "",
+          "type": "date",
+          "required": true
+        },
+        {
+          "fieldId": "Field15",
+          "label": "Discovery and Motion Cut-offs Will Be Based on New Trial Date",
+          "selected": "false",
+          "type": "checkbox",
+          "required": false
+        },
+        {
+          "fieldId": "Field16",
+          "label": "Number of Continuance",
+          "value": "",
+          "type": "text",
+          "required": false
+        },
+        {
+          "fieldId": "Field17",
+          "label": "Counsel for Plaintiff Signature",
+          "value": "",
+          "type": "text",
+          "required": true
+        },
+        {
+          "fieldId": "Field18",
+          "label": "Counsel for Defendant Signature",
+          "value": "",
+          "type": "text",
+          "required": true
+        }
+      ]
+    }
+  ]
+}

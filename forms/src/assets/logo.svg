@@ -1,0 +1,15 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="16" cy="16" r="16" fill="#409EFF"/>
+  
+  <!-- Gavel Icon -->
+  <path d="M24 12L20 8L18.5 9.5L17 8L15.5 9.5L14 8L12.5 9.5L11 8L9.5 9.5L8 8L7 9L8.5 10.5L7 12L8 13L9.5 11.5L11 13L12.5 11.5L14 13L15.5 11.5L17 13L18.5 11.5L20 13L21 12L19.5 10.5L21 9L20 8" 
+        fill="white" 
+        stroke="white" 
+        stroke-width="1"/>
+  
+  <!-- Document Lines -->
+  <rect x="10" y="15" width="12" height="2" rx="1" fill="white"/>
+  <rect x="10" y="19" width="12" height="2" rx="1" fill="white"/>
+  <rect x="10" y="23" width="8" height="2" rx="1" fill="white"/>
+</svg> 

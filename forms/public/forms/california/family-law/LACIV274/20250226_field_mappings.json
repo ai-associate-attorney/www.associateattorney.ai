@@ -1,0 +1,95 @@
+{
+  "form_metadata": {
+    "title": "Order To Have Voter Registration Information Declared Confidential",
+    "form_number": "LACIV274",
+    "revision_date": "06/19",
+    "purpose": "Request to declare voter's registration details confidential due to life-threatening circumstances.",
+    "legal_references": [
+      "Elections Code §§ 2166"
+    ],
+    "filing_instructions": "Submit to the Superior Court of California, County of Los Angeles.",
+    "applicable_court_jurisdictions": "Superior Court of California, County of Los Angeles"
+  },
+  "sections": [
+    {
+      "fieldId": "section_0",
+      "page": 1,
+      "sectionNo": "0",
+      "title": "Petitioner Information",
+      "fields": [
+        {
+          "fieldId": "field_Petitioner_Name",
+          "label": "Petitioner (Name)",
+          "value": "",
+          "type": "text",
+          "required": true
+        },
+        {
+          "fieldId": "field_Petitioner_Address",
+          "label": "Address",
+          "value": "",
+          "type": "textarea",
+          "required": false
+        },
+        {
+          "fieldId": "field_Petitioner_Email",
+          "label": "Email Address",
+          "value": "",
+          "type": "email",
+          "required": false
+        },
+        {
+          "fieldId": "field_Petitioner_Telephone",
+          "label": "Telephone",
+          "value": "",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "fieldId": "section_1",
+      "page": 1,
+      "sectionNo": "1",
+      "title": "Court Information",
+      "fields": [
+        {
+          "fieldId": "field_Court_Address",
+          "label": "Courthouse Address",
+          "value": "111 N. Hill Street Los Angeles, CA 90012",
+          "type": "text",
+          "required": true
+        },
+        {
+          "fieldId": "field_Case_Number",
+          "label": "Case Number",
+          "value": "",
+          "type": "text",
+          "required": true
+        },
+        {
+          "fieldId": "field_Court_Officer",
+          "label": "Judicial Officer",
+          "value": "",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "fieldId": "section_2",
+      "page": 1,
+      "sectionNo": "2",
+      "title": "Order Details",
+      "fields": [
+        {
+          "fieldId": "field_Order",
+          "label": "Order Statement",
+          "value": "",
+          "type": "textarea",
+          "required": true
+        }
+      ]
+    }
+  ]
+}

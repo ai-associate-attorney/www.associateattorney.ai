@@ -1,0 +1,866 @@
+{
+  "form_metadata": {
+    "title": "Request for Order",
+    "form_number": "FL-300",
+    "revision_date": "July 1, 2016",
+    "purpose": "To request orders related to child custody, visitation, child support, spousal support, attorney's fees, property control, and other family law matters.",
+    "legal_references": [
+      "Family Code §§ 2045, 2107, 6224, 6226, 6320-6326, 6380-6383",
+      "Government Code 26826",
+      "California Rules of Court, Rule 5.92"
+    ],
+    "filing_instructions": "Submit the completed form to the Superior Court of California in the appropriate county. Ensure that all required fields are completed and relevant attachments are included.",
+    "applicable_court_jurisdictions": "Superior Court of California"
+  },
+  "sections": [
+    {
+      "fieldId": "party_information",
+      "page": 1,
+      "sectionNo": "0",
+      "title": "Party Information",
+      "fields": [
+        { "fieldId": "ClientName", "label": "Name", "value": "", "type": "text", "required": true },
+        { "fieldId": "StateBarNo", "label": "State Bar Number", "value": "", "type": "text", "required": false },
+        { "fieldId": "FirmName", "label": "Firm Name", "value": "", "type": "text", "required": false },
+        { "fieldId": "StreetAddress", "label": "Street Address", "value": "", "type": "text", "required": true },
+        { "fieldId": "City", "label": "City", "value": "", "type": "text", "required": true },
+        { "fieldId": "State", "label": "State", "value": "", "type": "text", "required": true },
+        { "fieldId": "ZipCode", "label": "ZIP Code", "value": "", "type": "text", "required": true },
+        { "fieldId": "TelephoneNumber", "label": "Telephone Number", "value": "", "type": "text", "required": false },
+        { "fieldId": "FaxNumber", "label": "Fax Number", "value": "", "type": "text", "required": false },
+        { "fieldId": "EmailAddress", "label": "Email Address", "value": "", "type": "email", "required": false },
+        { "fieldId": "AttorneyForName", "label": "Attorney for (Name)", "value": "", "type": "text", "required": false }
+      ]
+    },
+    {
+      "fieldId": "court_information",
+      "page": 1,
+      "sectionNo": "1",
+      "title": "Court Information",
+      "fields": [
+        { "fieldId": "SuperiorCourtOfCaliforniaCountyOf", "label": "County", "value": "", "type": "text", "required": true },
+        { "fieldId": "SuperiorCourtOfCaliforniaBranchName", "label": "Branch Name", "value": "", "type": "text", "required": false },
+        { "fieldId": "SuperiorCourtOfCaliforniaStreetAddress", "label": "Street Address", "value": "", "type": "text", "required": true },
+        { "fieldId": "SuperiorCourtOfCaliforniaMailingAddress", "label": "Mailing Address", "value": "", "type": "text", "required": false },
+        { "fieldId": "SuperiorCourtOfCaliforniaCityAndZip", "label": "City and ZIP Code", "value": "", "type": "text", "required": true }
+      ]
+    },
+    {
+      "fieldId": "case_information_on_page_1",  
+      "page": 1,
+      "sectionNo": "2",
+      "title": "Case Information",
+      "fields": [
+        { "fieldId": "CaseNumberOnPage1", "label": "Case Number", "value": "", "type": "text", "required": true },
+        { "fieldId": "PetitionerNameOnPage1", "label": "Petitioner", "value": "", "type": "text", "required": true },
+        { "fieldId": "RespondentName", "label": "Respondent", "value": "", "type": "text", "required": true },
+        { "fieldId": "OtherParentOrParty", "label": "Other Parent/Party", "value": "", "type": "text", "required": false }
+      ]
+    },
+    {
+      "fieldId": "request_for_order",
+      "page": 1,
+      "sectionNo": "3",
+      "title": "Request for Order",
+      "fields": [
+        {
+          "fieldId": "order_type",
+          "label": "Type of Order Requested",
+          "value": "", "type": "checkbox_group",
+          "options": [
+            { "fieldId": "RequestForOrderIsChangeChkBx", "label": "Change", "selected": false },
+            { "fieldId": "RequestForOrderIsTemporaryEmergencyOrdersChkBx", "label": "Temporary Emergency Orders", "selected": false }
+          ],
+          "required": true
+        },
+        {
+          "fieldId": "order_category",
+          "label": "Order Requested",
+          "value": "", "type": "checkbox_group",
+          "options": [
+            { "fieldId": "RequestForOrderIsChildCustodyChkBx", "label": "Child Custody", "selected": false },
+            { "fieldId": "RequestForOrderIsVisitationChkBx", "label": "Visitation (Parenting Time)", "selected": false },
+            { "fieldId": "RequestForOrderIsChildSupportChkBx", "label": "Child Support", "selected": false },
+            { "fieldId": "RequestForOrderIsSpousalOrPartnerSupportChkBx", "label": "Spousal or Partner Support" },
+            { "fieldId": "RequestForOrderIsDomesticViolenceOrderChkBx", "label": "Domestic Violence Order" },
+            { "fieldId": "RequestForOrderIsAttorneyFeesAndCostsChkBx", "label": "Attorney's Fees and Costs" },
+            { "fieldId": "RequestForOrderIsPropertyControlChkBx", "label": "Property Control", "selected": false },
+            { "fieldId": "RequestForOrderIsOtherChkBx", "label": "Other (Specify)", "selected": false }
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "fieldId": "notice_of_hearing",
+      "page": 1,
+      "sectionNo": "4",
+      "title": "Notice of Hearing",
+      "fields": [
+        { "fieldId": "NoticeOfHearingToNames", "label": "TO (name(s))", "value": "", "type": "text", "required": true },
+        { "fieldId": "party_role", "label": "Role in Case", "value": "", "type": "checkbox_group", "options": [
+          { "fieldId": "NoticeOfHearingIsPetitionerChkBx", "label": "Petitioner", "selected": false },
+          { "fieldId": "NoticeOfHearingIsRespondentChkBx", "label": "Respondent", "selected": false },
+          { "fieldId": "NoticeOfHearingIsOtherParentOrPartyChkBx", "label": "Other Parent/Party", "selected": false },
+          { "fieldId": "NoticeOfHearingIsOtherChkBx", "label": "Other (Specify)", "selected": false }
+        ], "required": true },
+        { "fieldId": "NoticeOfHearingTypeIfOtherSpecify", "label": "Other (Specify)", "value": "", "type": "text", "required": false },
+        { "fieldId": "CourtHearingWillBeOnDate", "label": "Hearing Date", "value": "", "type": "date", "required": true },
+        { "fieldId": "CourtHearingWillBeOnTime", "label": "Hearing Time", "value": "", "type": "time", "required": true },
+        { "fieldId": "CourtHearingWillBeOnDepartment", "label": "Department", "value": "", "type": "text", "required": false },
+        { "fieldId": "CourtHearingWillBeOnRoom", "label": "Room", "value": "", "type": "text", "required": false },
+        { "fieldId": "CourtHearingDetailsIsSameChkBx", "label": "Address of Court", "value": "", "type": "checkbox_group", "options": [
+          { "fieldId": "CourtHearingDetailsIsSameChkBx", "label": "Same as noted above", "selected": false },
+          { "fieldId": "CourtHearingDetailsIsOtherChkBx", "label": "Other (Specify)", "selected": false }
+        ], "required": true },
+        { "fieldId": "CourtHearingWillBeHeldIfInOtherSpecify", "label": "Other (Specify)", "value": "", "type": "text", "required": false }
+      ]
+    },
+    {
+      "fieldId": "court_order",
+      "page": 1,
+      "sectionNo": "5",
+      "title": "Court Order - For Court Use Only",
+      "fields": [
+        { "fieldId": "CourtOrderIsForTimeChkBx", "label": "Time","type": "checkbox", "selected": false },
+        { "fieldId": "CourtOrderIsForServiceChkBx", "label": "For service", "type": "checkbox", "selected": false },
+        { "fieldId": "CourtOrderIsForUntilTheHearingChkBx", "label": "Until the hearing", "type": "checkbox", "selected": false },
+        { "fieldId": "CourtOrderServiceOnDate", "label": "Service Must Be On Or Before (date)", "value": "", "type": "date", "required": false },
+        { "fieldId": "CourtOrderIsForResponsiveDeclarationChkBx", "label": "A Responsive Declaration to Request for Order (form FL-320)", "type": "checkbox", "selected": false },
+        { "fieldId": "CourtOrderServedOnDate", "label": "Request for Order (form FL-320) must be served on or before", "value": "", "type": "date", "required": false },
+        { "fieldId": "CourtOrderIsPartiesAttendAnAppointmentChkBx", "label": "The parties must attend an appointment for child custody mediation", "type": "checkbox", "selected": false },
+        { "fieldId": "CourtOrderToAttendMediationForChildCustodyDateTimeLocation", "label": "Custody Mediation Requirement (specify date, time, and location):", "value": "", "type": "text", "required": false },
+        { "fieldId": "CourtOrderIsForTemporaryEmergencyOrdersChkBx", "label": "Temporary Emergency Orders Apply", "value": "", "type": "checkbox", "required": false },
+        { "fieldId": "CourtOrderIsForOtherChkBx", "label": "Other (Specify)", "value": "", "type": "checkbox", "required": false },
+        { "fieldId": "CourtOrderIfOtherSpecify", "label": "Other (Specify)", "value": "", "type": "text", "required": false },
+        { "fieldId": "DateSigned", "label": "Date signed", "value": "", "type": "date", "required": false },
+        { "fieldId": "CourtOrderJudicialOfficerName", "label": "Court order judicial officer name", "value": "", "type": "text", "required": false }
+      ]
+    },
+    {
+      "sectionId": "case_information_on_page_2",
+      "page": 2,
+      "sectionNo": "6",
+      "title": "Case Information",
+      "fields": [
+        {
+          "fieldId": "CaseNumberOnPage2",
+          "label": "Case Number",
+          "type": "text",
+          "value": "",
+          "required": true
+        },
+        {
+          "fieldId": "PetitionerNameOnPage2",
+          "label": "Petitioner",
+          "type": "text",
+          "value": "",
+          "required": true
+        },
+        {
+          "fieldId": "CourtOrderRespondentName",
+          "label": "Respondent",
+          "type": "text",
+          "value": "",
+          "required": true
+        },
+        {
+          "fieldId": "CourtOrderOtherParentOrParty",
+          "label": "Other Parent/Party",
+          "type": "text",
+          "value": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "sectionId": "restraining_order_information",
+      "page": 2,
+      "sectionNo": "7",
+      "title": "Restraining Order Information",
+      "fields": [
+        {
+          "fieldId": "RequestForOrderSpecifyNumberOfOrdersCurrentlyInEffect",
+          "label": "One or more domestic violence restraining/protective orders are now in effect between (specify):",
+          "type": "text",
+          "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderIsFor1RestrainingOrderChkBx",
+          "label": "One or more domestic violence restraining/protective orders are now in effect",
+          "type": "checkbox_group",
+          "options": [
+            { "fieldId": "RequestForOrderIsFor1RestrainingOrderForPetitionerChkBx", "label": "Against Petitioner", "selected": false },
+            { "fieldId": "RequestForOrderIsFor1RestrainingOrderRespondentChkBx", "label": "Against Respondent", "selected": false },
+            { "fieldId": "RequestForOrderIsFor1RestrainingOrderOtherParentorPartyChkBx", "label": "Against Other Parent/Party", "selected": false }
+          ],
+          "required": true
+        },
+        {
+          "fieldId": "RequestForOrderFromCourtsOfCountyAndState",
+          "label": "The orders are from the following court(s):",
+          "type": "checkbox_group",
+          "options": [
+            { "fieldId": "RequestForOrderIsFor1aRestrainingOrderCriminalCaseChkBx", "label": "Criminal Court", "selected": false },
+            { "fieldId": "RequestForOrderIsFor1bRestrainingOrderFamilyCaseChkBx", "label": "Family Court", "selected": false },
+            { "fieldId": "RequestForOrderIsFor1cRestrainingOrderJuvenileCaseChkBx", "label": "Juvenile Court", "selected": false },
+            { "fieldId": "RequestForOrderIsFor1dRestrainingOrderOtherCaseChkBx", "label": "Other Court", "selected": false }
+          ],
+          "required": true
+        },
+        {
+          "fieldId": "RequestForOrderFromCourtsSpecify",
+          "label": "Specify the court(s) from which the orders are from",
+          "type": "repeatable_group",
+          "fields": [
+            { "fieldId": "RequestForOrderTypeIfCriminalSpecify", "label": "Criminal Case Number", "type": "text", "value": "", "required": false },
+            { "fieldId": "RequestForOrderTypeIfFamilySpecify", "label": "Family Case Number", "type": "text", "value": "", "required": false },
+            { "fieldId": "RequestForOrderTypeIfJuvenileSpecify", "label": "Juvenile Case Number", "type": "text", "value": "", "required": false },
+            { "fieldId": "RequestForOrderTypeIfOtherSpecify", "label": "Other Case Number", "type": "text", "value": "", "required": false }
+          ],
+          "required": true
+        },
+        {
+          "fieldId": "case_numbers",
+          "label": "Case Numbers (if known)",
+          "type": "repeatable_group",
+          "fields": [
+            { "fieldId": "RequestForOrderTypeIfCriminalCaseNumber", "label": "Criminal Case Number", "type": "text", "value": "", "required": false },
+            { "fieldId": "RequestForOrderTypeIfFamilyCaseNumber", "label": "Family Case Number", "type": "text", "value": "", "required": false },
+            { "fieldId": "RequestForOrderTypeIfJuvenileCaseNumber", "label": "Juvenile Case Number", "type": "text", "value": "", "required": false },
+            { "fieldId": "RequestForOrderTypeIfOtherCaseNumber", "label": "Other Case Number", "type": "text", "value": "", "required": false }
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "sectionId": "child_custody_visitation",
+      "page": 2,
+      "sectionNo": "8",
+      "title": "Child Custody / Visitation (Parenting Time)",
+      "fields": [
+        {
+          "fieldId": "RequestForOrderIsFor2ChildCustodyChkBx",
+          "label": "I request temporary emergency orders",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "children_involved",
+          "label": "Children Involved",
+          "type": "repeatable_group",
+          "fields": [
+            { "fieldId": "CustodyOrVisitationFirstChildName", "label": "Child's Name", "type": "text", "value": "", "required": true },
+            { "fieldId": "CustodyOrVisitationFirstChildDateOfBirth", "label": "Date of Birth", "type": "date", "value": "", "required": true },
+            { "fieldId": "CustodyOrVisitationFirstChildLegalCustodyToName", "label": "Legal Custody to", "type": "text", "value": "", "required": true },
+            { "fieldId": "CustodyOrVisitationFirstChildPhysicalCustodyToName", "label": "Physical Custody to", "type": "text", "value": "", "required": true },
+            { "fieldId": "CustodyOrVisitationSecondChildName", "label": "Child's Name", "type": "text", "value": "", "required": true },
+            { "fieldId": "CustodyOrVisitationSecondChildDateOfBirth", "label": "Date of Birth", "type": "date", "value": "", "required": true },
+            { "fieldId": "CustodyOrVisitationSecondChildLegalCustodyToName", "label": "Legal Custody to", "type": "text", "value": "", "required": true },
+            { "fieldId": "CustodyOrVisitationSecondChildPhysicalCustodyToName", "label": "Physical Custody to", "type": "text", "value": "", "required": true },
+            { "fieldId": "CustodyOrVisitationThirdChildName", "label": "Child's Name", "type": "text", "value": "", "required": true },
+            { "fieldId": "CustodyOrVisitationThirdChildDateOfBirth", "label": "Date of Birth", "type": "date", "value": "", "required": true },
+            { "fieldId": "CustodyOrVisitationThirdChildLegalCustodyToName", "label": "Legal Custody to", "type": "text", "value": "", "required": true },
+            { "fieldId": "CustodyOrVisitationThirdChildPhysicalCustodyToName", "label": "Physical Custody to", "type": "text", "value": "", "required": true }
+          ]
+        },
+        {
+          "fieldId": "RequestForOrderIsForChildCustodyHasAttachment",
+          "label": "Attachment 2a.",
+          "type": "checkbox",
+          "selected": false,
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderIsFor2bChildCustodyRequestOrderForChkBx",
+          "label": "The orders I request for",
+          "type": "checkbox",
+          "selected": false,
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderForChildCustodyIn2bChildCustodyChkBx",
+          "label": "Child Custody",
+          "type": "checkbox",
+          "selected": false,
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderForChildCustodyIn2bVisitationChkBx",
+          "label": "Visitation (Parenting Time)",
+          "type": "checkbox",
+          "selected": false,
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderVisitParentingTime",
+          "label": "Visitation (Parenting Time)", 
+          "type": "text",
+          "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderIsFor2b1ChildCustodyFormsChkBx",
+          "label": "The orders I request for child custody or visitation (parenting time) are:",
+          "type": "checkbox_group",
+          "options": [
+            { "fieldId": "RequestForOrderIsFor2b1ChildCustodyForm305ChkBx", "label": "FL-305", "selected": false },
+            { "fieldId": "RequestForOrderIsFor2b1ChildCustodyForm311ChkBx", "label": "FL-311", "selected": false },
+            { "fieldId": "RequestForOrderIsFor2b1ChildCustodyForm312ChkBx", "label": "FL-312", "selected": false },
+            { "fieldId": "RequestForOrderIsFor2b1ChildCustodyForm341CChkBx", "label": "FL-341(C)", "selected": false },
+            { "fieldId": "RequestForOrderIsFor2b1ChildCustodyForm341DChkBx", "label": "FL-341(D)", "selected": false },
+            { "fieldId": "RequestForOrderIsFor2b1ChildCustodyForm341EChkBx", "label": "FL-341(E)", "selected": false },
+            { "fieldId": "RequestForOrderIsFor2b1ChildCustodyFormOtherChkBx", "label": "Other (Specify)", "selected": false }
+          ],
+          "required": true
+        },
+        {
+          "fieldId": "RequestForOrderIsFor2b2ChildCustodyAsFollowsChkBx",
+          "label": "As follows (Specify any additional orders requested)",
+          "type": "checkbox",
+          "selected": false,
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrdersAreAsFollows",
+          "label": "As follows (Specify any additional orders requested)",
+          "type": "textarea",
+          "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderIsFor2b2ChildCustodyHasAttachmentChkBx",
+          "label": "Attachment 2b",
+          "type": "checkbox",
+          "selected": false,
+          "required": false
+        },
+        {
+          "fieldId": "DescribeRequestForOrdersAreAsFollows",
+          "label": "Specify",
+          "type": "textarea",
+          "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrdersAreInBestInterestOfChildrenBecause",
+          "label": "The orders I request are in the best interest of the children because:",
+          "type": "textarea",
+          "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor2dChangeOrderChkBx",
+          "label": "This is a change from the current order for",
+          "type": "checkbox_group",
+          "options": [
+            { "fieldId": "RequestForOrderIsAskedOrderFor2dChildCustodyChkBx", "label": "Child Custody", "selected": false },
+            { "fieldId": "RequestForOrderIsAskedOrderFor2dVisitationChkBx", "label": "Visitation (Parenting Time)", "selected": false }
+          ],
+          "required": true
+        },
+        { "fieldId": "RequestForOrderIsAskedOrderFor2d1VisitationOrderChkBx", "label": "Spousal or Domestic Partner Support", "selected": false },
+        {
+          "fieldId": "RequestForOrderForVisitationFiledOnDate",
+          "label": "The visitation (parenting time) order was filed on (date):",
+          "type": "date",
+          "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderCourtOrderForVisitationSpecify",
+          "label": "The court ordered (specify):",
+          "type": "textarea",
+          "value": "",
+          "required": false
+        },
+        { "fieldId": "RequestForOrderIsAskedOrderFor2d1LegalOrPhysicalCustodyChkBx", "label": "Child Support", "selected": false },
+        {
+          "fieldId": "RequestForOrderForCustodyFiledOnDate",
+          "label": "The order for legal or physical custody was filed on (date):",
+          "type": "date",
+          "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor2dHasAttachmentChkBx",
+          "label": "Attachment 2d",
+          "type": "checkbox",
+          "selected": false,
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderCourtOrderForCustodySpecify",
+          "label": "The court ordered (specify):",
+          "type": "textarea",
+          "value": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "sectionId": "case_information",
+      "page": 3,
+      "sectionNo": "9",
+      "title": "Case Information",
+      "fields": [
+        {
+          "fieldId": "CaseNumberOnPage3",
+          "label": "Case Number",
+          "type": "text", "value": "",
+          "required": true
+        },
+        {
+          "fieldId": "PetitionerNameOnPage3",
+          "label": "Petitioner",
+          "type": "text", "value": "",
+          "required": true
+        },
+        {
+          "fieldId": "RequestForOrderRespondent",
+          "label": "Respondent",
+          "type": "text", "value": "",
+          "required": true
+        },
+        {
+          "fieldId": "RequestForOrderOtherParentOrParty",
+          "label": "Other Parent/Party",
+          "type": "text", "value": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "sectionId": "child_support",
+      "page": 3,
+      "sectionNo": "10",
+      "title": "Child Support",
+      "fields": [
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor3ChildSupportChkBx",
+          "label": "I request that the court order child support as follows:",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor3aChildSupportRequestForEachChkBx",
+          "label": "I request support for each child based on the child support guideline.",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "child_support_details",
+          "label": "Child Support Details",
+          "type": "repeatable_group",
+          "fields": [
+            { "fieldId": "FirstChildNameToSupport", "label": "Child's Name", "type": "text", "value": "", "required": true },
+            { "fieldId": "FirstChildAgeToSupport", "label": "Child's Age", "type": "number", "required": true },
+            { "fieldId": "FirstChildSupportMonthlyAmountRequested", "label": "Monthly Support Amount ($)", "type": "currency", "required": false },
+            { "fieldId": "SecondChildNameToSupport", "label": "Child's Name", "type": "text", "value": "", "required": true },
+            { "fieldId": "SecondChildAgeToSupport", "label": "Child's Age", "type": "number", "required": true },
+            { "fieldId": "SecondChildSupportMonthlyAmountRequested", "label": "Monthly Support Amount ($)", "type": "currency", "required": false },
+            { "fieldId": "ThirdChildNameToSupport", "label": "Child's Name", "type": "text", "value": "", "required": true },
+            { "fieldId": "ThirdChildAgeToSupport", "label": "Child's Age", "type": "number", "required": true },
+            { "fieldId": "ThirdChildSupportMonthlyAmountRequested", "label": "Monthly Support Amount ($)", "type": "currency", "required": false }
+          ]
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor3bChangeOrderChkBx",
+          "label": "Attach supporting documents for child support modification",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "WantToChangeCurrentChildSupportCourtOrderFiledOnDate",
+          "label": "I want to change a current court order for child support filed on (date):",
+          "type": "date",
+          "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "SpecifyCurrentChildSupportCourtOrder",
+          "label": "The court ordered child support as follows (specify):",
+          "type": "textarea",
+          "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor3aChildSupportAttachmentChkBx",
+          "label": "Attach supporting documents for child support modification",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor3dChildSupportAttachmentChkBx",
+          "label": "Attach supporting documents for child support modification",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "SpecifyReasonToMakeOrChangeTheSupportOrder",
+          "label": "The court should make or change the support orders because (specify):",
+          "type": "textarea",
+          "value": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "sectionId": "spousal_or_partner_support",
+      "page": 3,
+      "sectionNo": "11",
+      "title": "Spousal or Domestic Partner Support",
+      "fields": [
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor4SpousalSupportChkBx",
+          "label": "I request spousal or domestic partner support",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor4aSpousalSupportChkBx",
+          "label": "Spousal Support Amount requested",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "AmountRequestedToSupportSpousalOrDomesticPartner",
+          "label": "Amount requested (monthly):",
+          "type": "currency",
+          "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "ChangeOrEndOrderToSupportFiledOnDate",
+          "label": "I want the court to change or end the current support order filed on (date):",
+          "type": "date",
+          "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "AmountPerMonthOrderedByCourtForSupport",
+          "label": "The court ordered $ per month for support.",
+          "type": "currency",
+          "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor4bSpousalSupportIWantChkBx",
+          "label": "Attach supporting documents for spousal support modification",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor4bSpousalSupportIWantChangeChkBx",
+          "label": "I want the court to",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor4bSpousalSupportIWantEndChkBx",
+          "label": "I want to end the current support order",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor4eSpousalSupportAttachmentChkBx",
+          "label": "Attach supporting documents for spousal support modification",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "ReasonToMakeChangeOrEndSupportOrderSpecify",
+          "label": "The court should make, change, or end the support orders because (specify):",
+          "type": "textarea",
+          "value": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "sectionId": "property_control",
+      "page": 3,
+      "sectionNo": "12",
+      "title": "Property Control",
+      "fields": [
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor5PropertyControlChkBx",
+          "label": "I request property control orders",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "PropertyControlSpecify",
+          "label": "Property Description",
+          "type": "text", "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor5cPropertyControlChangeOrderChkBx",
+          "label": "This is a change from the current order for property control filed on (date):",
+          "type": "date", "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "property_control_debt_payment_obligations",
+          "label": "Debt Payment Obligations",
+          "type": "repeatable_group",
+          "fields": [
+            { "fieldId": "PropertyControlFirstPayTo", "label": "Pay to", "type": "text", "value": "", "required": false },
+            { "fieldId": "PropertyControlFirstPayFor", "label": "For", "type": "text", "value": "", "required": false },
+            { "fieldId": "PropertyControlFirstPayAmount", "label": "Amount ($)", "type": "currency", "value": "", "required": false },
+            { "fieldId": "PropertyControlFirstPayDueDate", "label": "Due Date", "type": "date", "value": "", "required": false },
+            { "fieldId": "PropertyControlSecondPayTo", "label": "Pay to", "type": "text", "value": "", "required": false },
+            { "fieldId": "PropertyControlSecondPayFor", "label": "For", "type": "text", "value": "", "required": false },
+            { "fieldId": "PropertyControlSecondPayAmount", "label": "Amount ($)", "type": "currency", "value": "", "required": false },
+            { "fieldId": "PropertyControlSecondPayDueDate", "label": "Due Date", "type": "date", "value": "", "required": false },
+            { "fieldId": "PropertyControlThirdPayTo", "label": "Pay to", "type": "text", "value": "", "required": false },
+            { "fieldId": "PropertyControlThirdPayFor", "label": "For", "type": "text", "value": "", "required": false },
+            { "fieldId": "PropertyControlThirdPayAmount", "label": "Amount ($)", "type": "currency", "value": "", "required": false },
+            { "fieldId": "PropertyControlThirdPayDueDate", "label": "Due Date", "type": "date", "value": "", "required": false },
+            { "fieldId": "PropertyControlFourthPayTo", "label": "Pay to", "type": "text", "value": "", "required": false },
+            { "fieldId": "PropertyControlFourthPayFor", "label": "For", "type": "text", "value": "", "required": false },
+            { "fieldId": "PropertyControlFourthPayAmount", "label": "Amount ($)", "type": "currency", "value": "", "required": false },
+            { "fieldId": "PropertyControlFourthPayDueDate", "label": "Due Date", "type": "date", "value": "", "required": false }
+          ]
+        },
+        {
+          "fieldId": "PropertyControlFiledOnDate",
+          "label": "Filed Date of Current Property Control Order",
+          "type": "date", "value": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "sectionId": "case_information",
+      "page": 4,
+      "sectionNo": "13",
+      "title": "Case Information",
+      "fields": [
+        {
+          "fieldId": "CaseNumberOnPage4",
+          "label": "Case Number",
+          "type": "text", "value": "",
+          "required": true
+        },
+        {
+          "fieldId": "PetitionerNameOnPage4",
+          "label": "Petitioner",
+          "type": "text", "value": "",
+          "required": true
+        },
+        {
+          "fieldId": "PropertyControlRespondent",
+          "label": "Respondent",
+          "type": "text", "value": "",
+          "required": true
+        },
+        {
+          "fieldId": "PropertyControlOtherParentOrParty",
+          "label": "Other Parent/Party",
+          "type": "text", "value": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "sectionId": "attorneys_fees_and_costs",
+      "page": 4,
+      "sectionNo": "14",
+      "title": "Attorney's Fees and Costs",
+      "fields": [
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor6AttorneyFeesChkBx",
+          "label": "I request attorney's fees and costs",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "AttorneyFeesAnCostTotalAmount",
+          "label": "Total amount requested ($)",
+          "type": "currency", "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor6bAttorneyFeesAttachmentChkBx",
+          "label": "I filed the following to support my request:",
+          "type": "checkbox_group",
+          "options": [
+            { "fieldId": "RequestForOrderIsAskedOrderFor6aAttorneyFeesChkBx", "label": "A Request for Attorney's Fees and Costs Attachment (FL-319)", "selected": false },
+            { "fieldId": "RequestForOrderIsAskedOrderFor6cAttorneyFeesChkBx", "label": "A Supporting Declaration for Attorney's Fees and Costs Attachment (FL-158)", "selected": false },
+            { "fieldId": "RequestForOrderIsAskedOrderFor6dAttorneyFeesChkBx", "label": "A declaration that addresses the factors covered in these forms", "selected": false }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "domestic_violence_orders",
+      "page": 4,
+      "sectionNo": "15",
+      "title": "Domestic Violence Orders",
+      "fields": [
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor7DomesticViolenceChkBx",
+          "label": "I request changes to a domestic violence restraining order",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "DVRestrainingOrderAfterHearingFiledOnDate",
+          "label": "The Restraining Order After Hearing (DV-130) was filed on (date):",
+          "type": "date", "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor7bDomesticViolenceChangeChkBx",
+          "label": "I request to change or end the following orders",
+          "type": "checkbox_group",
+          "options": [
+            { "fieldId": "RequestForOrderIsAskedOrderFor7bDomesticViolenceChangeChkBx", "label": "Change personal conduct order", "selected": false },
+            { "fieldId": "RequestForOrderIsAskedOrderFor7bDomesticViolenceEndChkBx", "label": "End stay-away order", "selected": false },
+            { "fieldId": "RequestForOrderIsAskedOrderFor7cDomesticViolenceRestrainingOrdersAttachmentChkBx", "label": "Other protective orders (specify below)", "selected": false }
+          ]
+        },
+        {
+          "fieldId": "DVRestrainingOrderChangesRequired",
+          "label": "I request that the court make the following changes to the restraining orders:",
+          "type": "textarea", "value": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "sectionId": "other_orders_requested",
+      "page": 4,
+      "sectionNo": "16",
+      "title": "Other Orders Requested",
+      "fields": [
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor8OtherOrdersChkBx",
+          "label": "I request other orders",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "OtherDVRestrainingOrderSpecify",
+          "label": "Specify other orders requested:",
+          "type": "textarea", "value": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "sectionId": "time_for_service_and_hearing",
+      "page": 4,
+      "sectionNo": "17",
+      "title": "Time for Service / Time Until Hearing",
+      "fields": [
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor9TimeForServiceChkBx",
+          "label": "I urgently need the hearing date and service of the Request for Order to be sooner.",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor9aTimeForServiceToServeChkBx",
+          "label": "To serve the Request for Order",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor9bTimeForServiceTheHearingChkBx",
+          "label": "The hearing date and service of the the Request for Order to be sooner.",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor9cTimeForServiceAttachmentChkBx",
+          "label": "Attachment 9c.",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "NumberOfCourtDaysBeforeDVRestrainingOrderHearing",
+          "label": "To serve the Request for Order no less than (number) court days before the hearing.",
+          "type": "number", "value": "",
+          "required": false
+        },
+        {
+          "fieldId": "DVRestrainingOrderNeededBecause",
+          "label": "I need the order because:",
+          "type": "textarea", "value": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "sectionId": "facts_supporting_request",
+      "page": 4,
+      "sectionNo": "18",
+      "title": "Facts Supporting the Orders Requested",
+      "fields": [
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor10FactsToSupportChkBx",
+          "label": "FACTS TO SUPPORT the orders I request are listed below",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "RequestForOrderIsAskedOrderFor10aFactsToSupportAttachmentChkBx",
+          "label": "Attachment 10",
+          "type": "checkbox",
+          "selected": false
+        },
+        {
+          "fieldId": "FactsToSupportRequestedOrders",
+          "label": "List facts to support the orders requested (cannot exceed 10 pages without court approval):",
+          "type": "textarea", "value": "",
+          "required": true
+        }
+      ]
+    },
+    {
+      "sectionId": "declaration_and_signature",
+      "page": 4,
+      "sectionNo": "19",
+      "title": "Declaration and Signature",
+      "fields": [
+        {
+          "fieldId": "FormFilledOnDate",
+          "label": "Date",
+          "type": "date", "value": "",
+          "required": true
+        },
+        {
+          "fieldId": "FormFilledByName",
+          "label": "Applicant's Name",
+          "type": "text", "value": "",
+          "required": true
+        },
+        {
+          "fieldId": "SignatureOfApplicant",
+          "label": "Signature of Applicant",
+          "type": "signature", "value": "",
+          "required": true
+        }
+      ]
+    },
+    {
+      "sectionId": "requests_for_accommodations",
+      "page": 4,
+      "sectionNo": "20",
+      "title": "Requests for Accommodations",
+      "fields": [
+        {
+          "fieldId": "AccommodationNotice",
+          "label": "Assistive listening systems, computer-assisted real-time captioning, or sign language interpreter services are available if you ask at least five days before the proceeding. Contact the clerk’s office or go to www.courts.ca.gov/forms for Request for Accommodations by Persons With Disabilities and Response (form MC-410). (Civ. Code, § 54.8.)",
+          "type": "info", "value": "",
+          "required": false
+        }
+      ]
+    }
+  ]
+}
