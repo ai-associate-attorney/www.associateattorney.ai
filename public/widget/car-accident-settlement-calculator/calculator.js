@@ -28,7 +28,7 @@
             const message = chatInput.value.trim();
             if (message) {
                 const messageElement = document.createElement('div');
-                messageElement.className = 'cas-calculator-message';
+                messageElement.className = 'cas-calculator-message user';
                 messageElement.textContent = message;
                 chatMessages.appendChild(messageElement);
                 chatInput.value = '';
