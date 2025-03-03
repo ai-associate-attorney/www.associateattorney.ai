@@ -1,30 +1,61 @@
-function initializeChat(url) {
-    // Log the URL to the console (or send it to your analytics)
-    console.log('Chat widget loaded on:', url);
-
-    // Example: Send the URL to Google Analytics
+(function() {
+    // Get referrer from query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const referrer = urlParams.get('referrer');
+    
+    // Send to Google Analytics
     if (typeof gtag === 'function') {
-        gtag('event', 'widget_usage', {
-            'event_category': 'Chat Widget',
-            'event_label': url
+        gtag('event', 'cas_calculator_widget_usage', {
+            'event_category': 'cas_calculator_widget',
+            'event_action': 'chat_initiated',
+            'event_label': referrer,
+            'widget_type': 'cas_calculator',
+            'referrer': referrer || 'direct'
         });
     }
 
-    // Add chat functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const sendButton = document.getElementById('send-button');
-        const chatInput = document.getElementById('chat-input');
-        const chatMessages = document.getElementById('chat-messages');
+    function initializeChat() {
+        const sendButton = document.getElementById('cas-calculator-send');
+        const chatInput = document.getElementById('cas-calculator-input');
+        const chatMessages = document.getElementById('cas-calculator-messages');
 
-        sendButton.addEventListener('click', function() {
-            const message = chatInput.value;
+        if (!sendButton || !chatInput || !chatMessages) {
+            setTimeout(initializeChat, 500);
+            return;
+        }
+
+        function handleMessage() {
+            const message = chatInput.value.trim();
             if (message) {
                 const messageElement = document.createElement('div');
-                messageElement.className = 'chat-message';
+                messageElement.className = 'cas-calculator-message';
                 messageElement.textContent = message;
                 chatMessages.appendChild(messageElement);
-                chatInput.value = ''; // Clear input
+                chatInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // Track only first message per session
+                if (!window.hasUserEngaged && typeof gtag === 'function') {
+                    window.hasUserEngaged = true;
+                    gtag('event', 'cas_calculator_first_interaction', {
+                        'event_category': 'cas_calculator_widget',
+                        'event_action': 'first_message_sent',
+                        'widget_type': 'cas_calculator',
+                        'referrer': referrer || 'direct'
+                    });
+                }
+            }
+        }
+
+        // Add event listeners
+        sendButton.addEventListener('click', handleMessage);
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleMessage();
             }
         });
-    });
-}
+    }
+
+    // Try to initialize immediately
+    initializeChat();
+})();
