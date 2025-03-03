@@ -143,13 +143,15 @@ const CarAccidentSettlementCalculator: React.FC = () => {
   const handleSendMessage = async (isFormUpdate: boolean = false) => {
     if ((!userInput.trim() && !isFormUpdate) || isLoading) return;
 
+    const messageText = isFormUpdate 
+      ? (userInput.trim() || 'I updated some values in the calculator.')
+      : userInput.trim();
+
     const newMessages = [
       ...messages,
       { 
         type: 'user', 
-        text: isFormUpdate 
-          ? 'I updated some values in the calculator.' 
-          : userInput.trim() 
+        text: messageText
       }
     ];
     setMessages(newMessages);
