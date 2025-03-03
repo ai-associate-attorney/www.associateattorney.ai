@@ -54,6 +54,15 @@ const CarAccidentSettlementCalculator: React.FC = () => {
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    if (AUTO_UPDATE_FROM_AI && messages.length > 0) {
+      const lastMessage = messages[messages.length - 1];
+      if (lastMessage.type === 'user') {
+        handleSendMessage(true);
+      }
+    }
+  }, [inputs]);
+
   const handleInputChange = (field: keyof DamageInputs, value: string) => {
     const numValue = value === '' ? 0 : parseFloat(value) || 0;
     setInputs(prev => ({
@@ -131,12 +140,17 @@ const CarAccidentSettlementCalculator: React.FC = () => {
     }
   };
 
-  const handleSendMessage = async () => {
-    if (!userInput.trim() || isLoading) return;
+  const handleSendMessage = async (isFormUpdate: boolean = false) => {
+    if ((!userInput.trim() && !isFormUpdate) || isLoading) return;
 
     const newMessages = [
       ...messages,
-      { type: 'user', text: userInput.trim() }
+      { 
+        type: 'user', 
+        text: isFormUpdate 
+          ? 'I updated some values in the calculator.' 
+          : userInput.trim() 
+      }
     ];
     setMessages(newMessages);
     setUserInput('');
@@ -305,145 +319,143 @@ Remember to:
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="pt-20 flex-1">
-        <div className="bg-gray-100 min-h-[calc(100vh-5rem)] p-4 md:p-8">
-          <div className="container mx-auto max-w-7xl h-full">
-            {/* Mobile Toggle Buttons */}
-            <div className="lg:hidden mb-4 flex gap-2">
-              <button
-                onClick={() => setActiveView('chat')}
-                className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-colors ${
-                  activeView === 'chat' 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-gray-200 text-gray-600'
-                }`}
-              >
-                Chat with AI Assistant
-              </button>
-              <button
-                onClick={() => setActiveView('calculator')}
-                className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-colors ${
-                  activeView === 'calculator' 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-gray-200 text-gray-600'
-                }`}
-              >
-                Calculator
-              </button>
-            </div>
+      <main className="pt-20 flex-1 bg-gray-100">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8 py-8">
+          {/* Mobile Toggle Buttons */}
+          <div className="lg:hidden mb-4 flex gap-2">
+            <button
+              onClick={() => setActiveView('chat')}
+              className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-colors ${
+                activeView === 'chat' 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-gray-200 text-gray-600'
+              }`}
+            >
+              Chat with AI Assistant
+            </button>
+            <button
+              onClick={() => setActiveView('calculator')}
+              className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-colors ${
+                activeView === 'calculator' 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-gray-200 text-gray-600'
+              }`}
+            >
+              Calculator
+            </button>
+          </div>
 
-            <div className="flex flex-col lg:flex-row gap-8 lg:items-end">
-              {/* Calculator Section */}
-              <div className={`flex-1 ${activeView === 'calculator' ? 'block' : 'hidden lg:block'}`}>
-                <div className="bg-white rounded-lg shadow-lg p-8 form_wrapper_2">
-                  <div className="text-center mb-8">
-                    <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                      Car Accident Settlement Calculator
-                    </h1>
-                    <p className="text-lg text-slate-600">
-                      Estimate the potential value of your car accident settlement claim
-                    </p>
-                  </div>
-                  
-                  <form>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-                      <div>
-                        <MoneyInput label="Medical Bills" field="medicalBills" />
-                        <MoneyInput label="Property Damage" field="propertyDamage" />
-                        <MoneyInput label="Future Lost Wages" field="futureLostWages" />
-                      </div>
-                      <div>
-                        <MoneyInput label="Future Medical Expenses" field="futureMedicalExpenses" />
-                        <MoneyInput label="Lost Wages" field="lostWages" />
-                        <div className="mb-8">
-                          <label htmlFor="generalDamagesMultiplier" className="block text-base font-medium text-gray-700 mb-2">
-                            General Damages Multiplier
-                          </label>
-                          <div className="flex items-center gap-4">
-                            <Input
-                              id="generalDamagesMultiplier"
-                              type="range"
-                              min="1.5"
-                              max="5"
-                              step="0.01"
-                              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                              value={inputs.generalDamagesMultiplier}
-                              onChange={(e) => handleInputChange('generalDamagesMultiplier', e.target.value)}
-                            />
-                            <span className="text-lg font-medium text-gray-900 min-w-[4rem]">
-                              {inputs.generalDamagesMultiplier.toFixed(2)}x
-                            </span>
-                          </div>
+          <div className="flex flex-col lg:flex-row gap-8 lg:items-end">
+            {/* Calculator Section */}
+            <div className={`flex-1 ${activeView === 'calculator' ? 'block' : 'hidden lg:block'}`}>
+              <div className="bg-white rounded-lg shadow-lg p-8 form_wrapper_2">
+                <div className="text-center mb-8">
+                  <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                    Car Accident Settlement Calculator
+                  </h1>
+                  <p className="text-lg text-slate-600">
+                    Estimate the potential value of your car accident settlement claim
+                  </p>
+                </div>
+                
+                <form>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+                    <div>
+                      <MoneyInput label="Medical Bills" field="medicalBills" />
+                      <MoneyInput label="Property Damage" field="propertyDamage" />
+                      <MoneyInput label="Future Lost Wages" field="futureLostWages" />
+                    </div>
+                    <div>
+                      <MoneyInput label="Future Medical Expenses" field="futureMedicalExpenses" />
+                      <MoneyInput label="Lost Wages" field="lostWages" />
+                      <div className="mb-8">
+                        <label htmlFor="generalDamagesMultiplier" className="block text-base font-medium text-gray-700 mb-2">
+                          General Damages Multiplier
+                        </label>
+                        <div className="flex items-center gap-4">
+                          <Input
+                            id="generalDamagesMultiplier"
+                            type="range"
+                            min="1.5"
+                            max="5"
+                            step="0.01"
+                            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                            value={inputs.generalDamagesMultiplier}
+                            onChange={(e) => handleInputChange('generalDamagesMultiplier', e.target.value)}
+                          />
+                          <span className="text-lg font-medium text-gray-900 min-w-[4rem]">
+                            {inputs.generalDamagesMultiplier.toFixed(2)}x
+                          </span>
                         </div>
                       </div>
                     </div>
-                  </form>
-
-                  <div className="mt-8 p-6 bg-blue-50 rounded-lg">
-                    <div className="flex justify-between items-center">
-                      <span className="text-xl font-medium text-blue-900">Estimated Settlement:</span>
-                      <span className="text-3xl font-bold text-blue-600">
-                        ${calculateSettlement().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                      </span>
-                    </div>
                   </div>
+                </form>
 
-                  <div className="mt-6 text-sm text-gray-500">
-                    <p>Note: This calculator provides a rough estimate of potential settlement value. Actual compensation may vary based on specific circumstances, liability, insurance coverage, and other factors. Consult with a legal professional for accurate evaluation of your case.</p>
+                <div className="mt-8 p-6 bg-blue-50 rounded-lg">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xl font-medium text-blue-900">Estimated Settlement:</span>
+                    <span className="text-3xl font-bold text-blue-600">
+                      ${calculateSettlement().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </span>
                   </div>
                 </div>
+
+                <div className="mt-6 text-sm text-gray-500">
+                  <p>Note: This calculator provides a rough estimate of potential settlement value. Actual compensation may vary based on specific circumstances, liability, insurance coverage, and other factors. Consult with a legal professional for accurate evaluation of your case.</p>
+                </div>
               </div>
+            </div>
 
-              {/* Chat Interface */}
-              <div className={`lg:w-96 ${activeView === 'chat' ? 'block' : 'hidden lg:block'}`}>
-                <div className="bg-white rounded-lg shadow-lg flex flex-col h-[calc(100vh-8rem)] lg:h-[600px]">
-                  {/* Fixed Header */}
-                  <div className="h-16 px-6 flex items-center border-b flex-shrink-0">
-                    <h3 className="font-semibold">Chat with AI Assistant</h3>
-                  </div>
-                  
-                  {/* Scrollable Messages Area */}
-                  <div className="flex-1 overflow-y-auto p-4" ref={messagesContainerRef}>
-                    <div className="space-y-4">
-                      {messages.map((message, index) => (
-                        <div
-                          key={index}
-                          className={`p-4 rounded-lg ${
-                            message.type === 'user'
-                              ? 'bg-blue-100 ml-8'
-                              : 'bg-gray-100 mr-8'
-                          }`}
-                        >
-                          <div dangerouslySetInnerHTML={{ __html: message.text }} />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Fixed Input Area */}
-                  <div className="h-24 border-t p-4 flex-shrink-0">
-                    <div className="flex gap-2">
-                      <Input
-                        type="text"
-                        placeholder="Type your message..."
-                        value={userInput}
-                        onChange={(e) => setUserInput(e.target.value)}
-                        onKeyPress={(e) => {
-                          if (e.key === 'Enter') {
-                            e.preventDefault(); // Prevent page scroll
-                            handleSendMessage();
-                          }
-                        }}
-                        className="flex-1"
-                      />
-                      <button
-                        onClick={handleSendMessage}
-                        disabled={isLoading}
-                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+            {/* Chat Interface */}
+            <div className={`lg:w-96 ${activeView === 'chat' ? 'block' : 'hidden lg:block'}`}>
+              <div className="bg-white rounded-lg shadow-lg flex flex-col h-[calc(100vh-8rem)] lg:h-[600px]">
+                {/* Fixed Header */}
+                <div className="h-16 px-6 flex items-center border-b flex-shrink-0">
+                  <h3 className="font-semibold">Chat with AI Assistant</h3>
+                </div>
+                
+                {/* Scrollable Messages Area */}
+                <div className="flex-1 overflow-y-auto p-4" ref={messagesContainerRef}>
+                  <div className="space-y-4">
+                    {messages.map((message, index) => (
+                      <div
+                        key={index}
+                        className={`p-4 rounded-lg ${
+                          message.type === 'user'
+                            ? 'bg-blue-100 ml-8'
+                            : 'bg-gray-100 mr-8'
+                        }`}
                       >
-                        Send
-                      </button>
-                    </div>
+                        <div dangerouslySetInnerHTML={{ __html: message.text }} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Fixed Input Area */}
+                <div className="h-24 border-t p-4 flex-shrink-0">
+                  <div className="flex gap-2">
+                    <Input
+                      type="text"
+                      placeholder="Type your message..."
+                      value={userInput}
+                      onChange={(e) => setUserInput(e.target.value)}
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault(); // Prevent page scroll
+                          handleSendMessage();
+                        }
+                      }}
+                      className="flex-1"
+                    />
+                    <button
+                      onClick={handleSendMessage}
+                      disabled={isLoading}
+                      className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                    >
+                      Send
+                    </button>
                   </div>
                 </div>
               </div>
