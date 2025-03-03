@@ -1,7 +1,8 @@
 (function() {
     // Get the current webpage URL and encode it
     const currentUrl = window.location.href;
-    const scriptBasePath = 'http://localhost:8080'; //'https://www.associateattorney.ai';
+    const scriptBasePath = 'https://www.associateattorney.ai';
+    // const scriptBasePath = 'http://localhost:8080'; //'https://www.associateattorney.ai';
 
     // Encode the URL safely for query parameter
     const encodedUrl = encodeURIComponent(currentUrl);
