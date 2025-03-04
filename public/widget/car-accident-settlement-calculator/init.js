@@ -26,7 +26,7 @@
     chatContainer.id = 'cas-calculator-widget';
     chatContainer.innerHTML = `
         <div class="chat-header">
-            <span>Chat Assistant</span>
+            <span>Car Accident Settlement Calculator</span>
             <button class="cas-calculator-minimize-btn">−</button>
         </div>
         <div id="cas-calculator-messages" class="chat-messages"></div>
